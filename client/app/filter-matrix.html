@@ -1,0 +1,14 @@
+<input type="text" ng-model="filterMatrixCtrl.filterMatrix.name"/>
+<input type="text" ng-model="filterMatrixCtrl.filterMatrixSize"/>
+<button ng-click="filterMatrixCtrl.setSize()">Set size</button>
+
+<table class="filter-matrix">
+    <tr ng-repeat="row in filterMatrixCtrl.filterMatrix.data">
+        <td ng-repeat="cell in row track by $index">
+            <input type="number" ng-model="row[$index]"/>
+        </td>
+    </tr>
+</table>
+
+<button ng-click="filterMatrixCtrl.save()">Save filter matrix</button>
+<a ui-sref="filter-matrices">Back to filter matrices list</a>
