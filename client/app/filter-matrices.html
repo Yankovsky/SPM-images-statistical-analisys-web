@@ -1,16 +1,28 @@
-<ul>
-    <li role="presentation" ng-repeat="fm in filterMatricesCtrl.filterMatrices" ng-class="{active: filterMatricesCtrl.isSelected(fm)}">
-        <a ui-sref="filter-matrix({id: fm._id})">{{fm.name}}</a>
+<div class="filter-matrices">
+    <div class="bs-callout bs-callout-primary">
+        <h4>Filter matrices upload</h4>
+        <p class="pre-line">
+            Uploaded filter matrices should be in following format:
+            1 2 3
+            0 0 0
+            -3 2 10
+        </p>
+    </div>
 
-        <div class="btn-group">
-            <button type="button" class="btn btn-default" ng-click="filterMatricesCtrl.clone(fm)">Copy</button>
-            <button type="button" class="btn btn-default" ng-click="filterMatricesCtrl.select(fm)" ng-if="!filterMatricesCtrl.isSelected(fm)">Select</button>
-            <button type="button" class="btn btn-default" ng-click="filterMatricesCtrl.remove(fm)">Delete</button>
-        </div>
-    </li>
-</ul>
-<div class="btn-group">
-    <button class="btn btn-default" ngf-select ngf-change="filterMatricesCtrl.upload($files)">Upload filter matrix from file</button>
-    <button type="button" class="btn btn-default" ng-click="filterMatricesCtrl.create()">Create new filter matrix</button>
+    <ul class="list-group">
+        <li class="list-group-item" role="presentation" ng-repeat="fm in filterMatricesCtrl.filterMatrices" ng-class="{active: filterMatricesCtrl.isSelected(fm)}">
+            <span class="title">{{fm.name}}</span>
+            <div class="btn-group pull-right">
+                <a class="btn btn-default" ui-sref="filter-matrix({id: fm._id})">View</a>
+                <button class="btn btn-default" ng-click="filterMatricesCtrl.clone(fm)">Copy</button>
+                <button class="btn btn-default" ng-click="filterMatricesCtrl.select(fm)" ng-if="!filterMatricesCtrl.isSelected(fm)">Select</button>
+                <button class="btn btn-default" ng-click="filterMatricesCtrl.remove(fm)">Delete</button>
+            </div>
+        </li>
+    </ul>
+
+    <div class="btn-group">
+        <button class="btn btn-default" ngf-select ngf-change="filterMatricesCtrl.upload($files)">Upload filter matrix from file</button>
+        <button class="btn btn-default" ng-click="filterMatricesCtrl.create()">Create new filter matrix</button>
+    </div>
 </div>
-<ui-view></ui-view>

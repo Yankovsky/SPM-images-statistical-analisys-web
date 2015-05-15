@@ -17,14 +17,15 @@
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
         <!-- build:css(client) app/vendor.css -->
         <!-- bower:css -->
-        <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
-        <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css" />
+        <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css"/>
+        <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css"/>
         <!-- endbower -->
         <!-- endbuild -->
         <!-- build:css({.tmp,client}) app/app.css -->
         <link rel="stylesheet" href="app/app.css">
         <!-- injector:css -->
         <link rel="stylesheet" href="app/app.css">
+        <link rel="stylesheet" href="app/bs-callout.css">
         <link rel="stylesheet" href="app/main.css">
         <link rel="stylesheet" href="components/modal/modal.css">
         <!-- endinjector -->
@@ -35,17 +36,22 @@
         <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a
                 href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-        <div class="navbar navbar-default navbar-static-top">
-            <div>
+        <header class="navbar navbar-default navbar-static-top">
+            <div class="container">
+                <div class="navbar-brand">SPM images statistical analysis</div>
                 <ul class="nav navbar-nav">
                     <li ng-repeat="tab in mainCtrl.tabs" ui-sref-active="active">
                         <a ui-sref="{{tab.state}}">{{tab.name}}</a>
                     </li>
                 </ul>
             </div>
-        </div>
+        </header>
         <!-- Add your site or application content here -->
-        <div ui-view></div>
+        <div class="container">
+            <div class="row">
+                <ui-view class="col-md-9"></ui-view>
+            </div>
+        </div>
 
         <!--[if lt IE 9]>
         <script src="bower_components/es5-shim/es5-shim.js"></script>

@@ -1,3 +1,20 @@
-.filter-matrix input {
-    width: 40px;
+.filter-matrices .title {
+    line-height: 35px;
+}
+
+.filter-matrix .cell-value {
+    width: 100%;
+}
+
+.filter-matrix .input-group[class*="col-"] {
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.filter-matrix table {
+
+}
+
+.pre-line {
+    white-space: pre-line
 }

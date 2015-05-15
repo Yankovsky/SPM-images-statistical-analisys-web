@@ -4,11 +4,18 @@ angular.module('spmApp').controller('FilterMatricesCtrl', function($http, $state
 	var ctrl = this;
 
 	$http.get('/api/filter-matrices').success(function(filterMatrices) {
-		ctrl.filterMatrices = filterMatrices
+		ctrl.filterMatrices = filterMatrices;
+		if (!SelectedFilterMatrix._id) {
+			selectFirst();
+		}
 	});
 
 	function createSuccess(filterMatrix) {
 		$state.go('filter-matrix', {id: filterMatrix._id});
+	}
+
+	function selectFirst() {
+		SelectedFilterMatrix.value = ctrl.filterMatrices[0];
 	}
 
 	ctrl.isSelected = function(filterMatrix) {
@@ -44,9 +51,12 @@ angular.module('spmApp').controller('FilterMatricesCtrl', function($http, $state
 
 	ctrl.remove = function(filterMatrixToDelete) {
 		$http.delete('/api/filter-matrices/' + filterMatrixToDelete._id).success(function() {
-			_.remove(ctrl.filterMatrices, function(filterMatrix) {
+			var removedFilterMatrices = _.remove(ctrl.filterMatrices, function(filterMatrix) {
 				return filterMatrix._id == filterMatrixToDelete._id;
-			})
+			});
+			if (ctrl.isSelected(removedFilterMatrices[0])) {
+				selectFirst();
+			}
 		})
 	};
 
