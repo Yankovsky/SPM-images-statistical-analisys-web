@@ -19,7 +19,7 @@ angular.module('spmApp').controller('FilterMatrixCtrl', function($http, $statePa
 
 	ctrl.save = function() {
 		$http.put('/api/filter-matrices/' + ctrl.filterMatrix._id, ctrl.filterMatrix).success(function() {
-			alert('Saved');
+			window.alert('Saved');
 		});
 	};
 });

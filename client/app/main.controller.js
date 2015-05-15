@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('spmApp').controller('MainCtrl', function($location) {
+angular.module('spmApp').controller('MainCtrl', function() {
 	var ctrl = this;
 	ctrl.tabs = [
 		{name: 'Topo matrix', state: 'topo-matrix'},
