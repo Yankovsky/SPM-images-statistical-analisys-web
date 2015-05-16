@@ -1,0 +1,58 @@
+.flash-message.ng-enter, .flash-message.ng-leave.ng-leave-active {
+    opacity: 0;
+}
+
+.flash-message.ng-leave, .flash-message.ng-enter.ng-enter-active {
+    opacity: 1;
+}
+
+.flash-messages {
+    position: fixed;
+    top: 120px;
+    left: 50%;
+    margin-left: -232px;
+    z-index: 1000;
+}
+
+.flash-message {
+    transition: 0.5s linear all;
+    margin-bottom: 10px;
+    text-align: center;
+    font-size: 14px;
+    line-height: 24px;
+    padding: 8px 16px;
+    color: #fff;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    width: 464px;
+    box-sizing: border-box;
+}
+
+.flash-message.error {
+    background: #e64425;
+    background: repeating-linear-gradient(-45deg, #e74e30, #e74e30 10px, #ec5337 10px, #ec5337 20px);
+    border-color: #e64425;
+}
+
+.flash-message.warning {
+    background: #ccbd8f;
+    background: repeating-linear-gradient(-45deg, #cfc095, #cfc095 10px, #d1c39a 10px, #d1c39a 20px);
+    border-color: #ccbd8f;
+}
+
+.flash-message.info {
+    background: #363e4e;
+    background: repeating-linear-gradient(-45deg, #404857, #404857 10px, #454d5c 10px, #454d5c 20px);
+    border-color: #363e4e;
+}
+
+.flash-message.success {
+    background: #59b368;
+    background: repeating-linear-gradient(-45deg, #61b770, #61b770 10px, #68bd75 10px, #68bd75 20px);
+    border-color: #59b368;
+}
+
+.flash-message a {
+    text-decoration: none;
+    color: #8d97a6;
+}

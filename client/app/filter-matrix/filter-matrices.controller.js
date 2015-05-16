@@ -30,7 +30,10 @@ angular.module('spmApp').controller('FilterMatricesCtrl', function($state, Uploa
 	ctrl.select = FilterMatrices.select;
 	ctrl.destroy = FilterMatrices.destroy;
 	ctrl.clone = function(filterMatrix) {
-		FilterMatrices.create(filterMatrix).success(createSuccess);
+		FilterMatrices.create({
+			name: filterMatrix.name + ' copy',
+			data: filterMatrix.data
+		}).success(createSuccess);
 	};
 	ctrl.create = function() {
 		FilterMatrices.create({

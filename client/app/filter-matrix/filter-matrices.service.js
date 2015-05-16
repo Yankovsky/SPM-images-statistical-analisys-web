@@ -5,9 +5,7 @@ angular.module('spmApp').factory('FilterMatrices', function($http, localStorageS
 
 	function select(filterMatrix) {
 		selectedFilterMatrix = filterMatrix;
-		if (filterMatrix) {
-			localStorageService.set('selectedFilterMatrixId', filterMatrix._id);
-		}
+		localStorageService.set('selectedFilterMatrixId', filterMatrix && filterMatrix._id);
 	}
 
 	function isSelected(filterMatrix) {
@@ -38,10 +36,7 @@ angular.module('spmApp').factory('FilterMatrices', function($http, localStorageS
 			})
 		},
 		create: function(filterMatrix) {
-			return $http.post('/api/filter-matrices', {
-				name: filterMatrix.name + ' copy',
-				data: filterMatrix.data
-			}).success(function(filterMatrix) {
+			return $http.post('/api/filter-matrices', filterMatrix).success(function(filterMatrix) {
 				filterMatrices.push(filterMatrix);
 				if (!selectedFilterMatrix) {
 					select(filterMatrix);

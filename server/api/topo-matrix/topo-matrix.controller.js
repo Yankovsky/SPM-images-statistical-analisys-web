@@ -41,7 +41,7 @@ exports.update = function(req, res) {
     _.extend(topoMatrix, req.body);
     topoMatrix.save(function (err) {
       if (err) { return handleError(res, err); }
-      return res.json(200, topoMatrix);
+      return res.send(200);
     });
   });
 };

@@ -6,7 +6,8 @@ angular.module('spmApp', [
 	'ui.router',
 	'ui.bootstrap',
 	'angular-loading-bar',
-	'ngAnimate'
+	'ngAnimate',
+	'ngFlash'
 ]).config(function($stateProvider, $urlRouterProvider, $locationProvider) {
 	$stateProvider
 		.state('app', {
@@ -15,10 +16,10 @@ angular.module('spmApp', [
 			resolve: {
 				filterMatrices: function(FilterMatrices) {
 					return FilterMatrices.init();
-				}/*,
+				},
 				topoMatrices: function(TopoMatrices) {
 					return TopoMatrices.init();
-				}*/
+				}
 			}
 		})
 		.state('app.topo-matrices', {

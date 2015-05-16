@@ -27,6 +27,7 @@
         <!-- injector:css -->
         <link rel="stylesheet" href="app/app.css">
         <link rel="stylesheet" href="app/bs-callout.css">
+        <link rel="stylesheet" href="app/flash.css">
         <link rel="stylesheet" href="app/main.css">
         <link rel="stylesheet" href="components/modal/modal.css">
         <!-- endinjector -->
@@ -49,6 +50,7 @@
         </header>
         <!-- Add your site or application content here -->
         <div class="container">
+            <div flash-messages></div>
             <div class="row">
                 <ui-view class="col-md-9"></ui-view>
             </div>
@@ -69,6 +71,8 @@
         <script src="bower_components/angular-animate/angular-animate.js"></script>
         <script src="bower_components/angular-loading-bar/build/loading-bar.js"></script>
         <script src="bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
+        <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+        <script src="bower_components/angular-flash/dist/angular-flash.min.js"></script>
         <!-- endbower -->
         <!-- endbuild -->
 
@@ -81,8 +85,8 @@
         <script src="app/main/main.controller.js"></script>
         <script src="app/new-topo-matrix/new-topo-matrix.controller.js"></script>
         <script src="app/settings/settings.controller.js"></script>
-        <script src="app/topo-matrix/selected-topo-matrix.service.js"></script>
         <script src="app/topo-matrix/topo-matrices.controller.js"></script>
+        <script src="app/topo-matrix/topo-matrices.service.js"></script>
         <script src="app/topo-matrix/topo-matrix.controller.js"></script>
         <script src="components/modal/modal.service.js"></script>
         <!-- endinjector -->

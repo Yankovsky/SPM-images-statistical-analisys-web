@@ -1,22 +1,9 @@
 'use strict';
 
-angular.module('spmApp').controller('TopoMatricesCtrl', function($http, $state, Upload, SelectedTopoMatrix) {
+angular.module('spmApp').controller('TopoMatricesCtrl', function($state, Upload, TopoMatrices) {
 	var ctrl = this;
 
-	$http.get('/api/topo-matrices').success(function(topoMatrices) {
-		ctrl.topoMatrices = topoMatrices;
-		if (!SelectedTopoMatrix.value._id) {
-			selectFirst();
-		}
-	});
-
-	function selectFirst() {
-		SelectedTopoMatrix.value = ctrl.topoMatrices[0];
-	}
-
-	ctrl.isSelected = function(topoMatrix) {
-		return topoMatrix._id === SelectedTopoMatrix.value._id;
-	};
+	ctrl.topoMatrices = TopoMatrices.index();
 
 	ctrl.upload = function(files) {
 		if (files && files.length) {
@@ -26,29 +13,16 @@ angular.module('spmApp').controller('TopoMatricesCtrl', function($http, $state, 
 				fileReader.readAsText(file);
 				/*jshint loopfunc: true */
 				fileReader.onload = function(e) {
-					$http.post('/api/topo-matrices', {
+					TopoMatrices.create({
 						name: file.name,
 						data: e.target.result
-					}).success(function(topoMatrix) {
-						ctrl.topoMatrices.push(topoMatrix);
 					});
 				};
 			}
 		}
 	};
 
-	ctrl.select = function(topoMatrix) {
-		SelectedTopoMatrix.value = topoMatrix;
-	};
-
-	ctrl.destroy = function(topoMatrixToDelete) {
-		$http.delete('/api/topo-matrices/' + topoMatrixToDelete._id).success(function() {
-			var removedTopoMatrices = _.remove(ctrl.topoMatrices, function(topoMatrix) {
-				return topoMatrix._id === topoMatrixToDelete._id;
-			});
-			if (ctrl.isSelected(removedTopoMatrices[0])) {
-				selectFirst();
-			}
-		});
-	};
+	ctrl.isSelected = TopoMatrices.isSelected;
+	ctrl.select = TopoMatrices.select;
+	ctrl.destroy = TopoMatrices.destroy;
 });

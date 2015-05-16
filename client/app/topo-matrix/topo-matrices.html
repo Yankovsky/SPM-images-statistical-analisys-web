@@ -3,9 +3,9 @@
         <h4>Topo matrices upload</h4>
         <pre class="pre-line">
             Uploaded filter matrices should be in following format:
-            1   2   3
-            0   0   0
-            -3  2   10
+            1&#09;2&#09;3
+            0&#09;0&#09;0
+            -3&#09;2&#09;10
             Notice, that "tab" character is used as column delimiter
         </pre>
     </div>
@@ -14,7 +14,7 @@
         <li class="list-group-item" ng-repeat="tm in topoMatricesCtrl.topoMatrices" ng-class="{active: topoMatricesCtrl.isSelected(tm)}">
             <span class="title">{{tm.name}}</span>
             <div class="btn-group pull-right">
-                <a class="btn btn-default" ui-sref="topo-matrix({id: tm._id})">Edit</a>
+                <a class="btn btn-default" ui-sref="app.topo-matrix({id: tm._id})">Edit</a>
                 <button class="btn btn-default" ng-click="topoMatricesCtrl.select(tm)" ng-if="!topoMatricesCtrl.isSelected(tm)">Select</button>
                 <button class="btn btn-default" ng-click="topoMatricesCtrl.destroy(tm)">Delete</button>
             </div>

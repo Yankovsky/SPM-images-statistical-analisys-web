@@ -1,9 +1,13 @@
 'use strict';
 
-angular.module('spmApp').controller('FilterMatrixCtrl', function($stateParams, FilterMatrices) {
+angular.module('spmApp').controller('FilterMatrixCtrl', function($state, $stateParams, $flash, FilterMatrices) {
 	var ctrl = this;
 
 	ctrl.filterMatrix = FilterMatrices.show($stateParams.id);
+	if (!ctrl.filterMatrix) {
+		$flash('Filter matrix with id ' + $stateParams.id + ' is not found.', {type: 'error'});
+		$state.go('app.filter-matrices', null, {location: 'replace'})
+	}
 	ctrl.filterMatrixSize = ctrl.filterMatrix.data.length;
 
 	ctrl.setSize = function() {
@@ -17,7 +21,7 @@ angular.module('spmApp').controller('FilterMatrixCtrl', function($stateParams, F
 
 	ctrl.save = function() {
 		FilterMatrices.update(ctrl.filterMatrix).then(function() {
-			window.alert('Saved');
+			$flash('Filter matrix "' + ctrl.filterMatrix.name + '" successfully updated!', {type: 'success'})
 		});
 	};
 });
