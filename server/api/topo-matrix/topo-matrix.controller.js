@@ -10,7 +10,6 @@
 'use strict';
 
 var _ = require('lodash');
-var matrixParser = require('../../utils/matrix-parser');
 var TopoMatrix = require('./topo-matrix.model');
 
 // Get list of things
@@ -23,16 +22,12 @@ exports.index = function(req, res) {
 
 // Creates a new thing in the DB.
 exports.create = function(req, res) {
-  if (_.isString(req.body.data)) {
-    req.body.data = matrixParser(req.body.data, '\n', '\t')
-  }
   TopoMatrix.create(req.body, function(err, topoMatrix) {
     if(err) { return handleError(res, err); }
     return res.json(201, topoMatrix);
   });
 };
 
-// Updates an existing thing in the DB.
 exports.update = function(req, res) {
   if(req.body._id) { delete req.body._id; }
   TopoMatrix.findById(req.params.id, function (err, topoMatrix) {

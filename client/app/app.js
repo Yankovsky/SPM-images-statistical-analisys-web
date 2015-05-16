@@ -3,6 +3,7 @@
 angular.module('spmApp', [
 	'LocalStorageModule',
 	'ngFileUpload',
+	'ya.nouislider',
 	'ui.router',
 	'ui.bootstrap',
 	'angular-loading-bar',

@@ -9,7 +9,6 @@
 'use strict';
 
 var _ = require('lodash');
-var matrixParser = require('../../utils/matrix-parser');
 var FilterMatrix = require('./filter-matrix.model');
 
 // Get list of things
@@ -22,9 +21,6 @@ exports.index = function(req, res) {
 
 // Creates a new thing in the DB.
 exports.create = function(req, res) {
-  if (_.isString(req.body.data)) {
-    req.body.data = matrixParser(req.body.data, '\n', ' ')
-  }
   FilterMatrix.create(req.body, function(err, filterMatrix) {
     if(err) { return handleError(res, err); }
     return res.json(201, filterMatrix);

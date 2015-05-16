@@ -10,6 +10,9 @@
         </div>
     </form>
 
+    {{topoMatrixCtrl.range}}
+    <div no-ui-slider='topoMatrixCtrl.sliderOptions' ng-model='topoMatrixCtrl.range'></div>
+
     <button class="btn btn-primary" ng-click="topoMatrixCtrl.save()">Save topo matrix</button>
     <a class="btn btn-link" ui-sref="app.topo-matrices">Back to topo matrices list</a>
 </div>
