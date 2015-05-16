@@ -13,10 +13,10 @@
         <li class="list-group-item" ng-repeat="fm in filterMatricesCtrl.filterMatrices" ng-class="{active: filterMatricesCtrl.isSelected(fm)}">
             <span class="title">{{fm.name}}</span>
             <div class="btn-group pull-right">
-                <a class="btn btn-default" ui-sref="filter-matrix({id: fm._id})">View</a>
+                <a class="btn btn-default" ui-sref="app.filter-matrix({id: fm._id})">View</a>
                 <button class="btn btn-default" ng-click="filterMatricesCtrl.clone(fm)">Copy</button>
                 <button class="btn btn-default" ng-click="filterMatricesCtrl.select(fm)" ng-if="!filterMatricesCtrl.isSelected(fm)">Select</button>
-                <button class="btn btn-default" ng-click="filterMatricesCtrl.remove(fm)">Delete</button>
+                <button class="btn btn-default" ng-click="filterMatricesCtrl.destroy(fm)">Delete</button>
             </div>
         </li>
     </ul>

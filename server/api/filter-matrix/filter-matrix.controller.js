@@ -2,7 +2,6 @@
  * Using Rails-like standard naming convention for endpoints.
  * GET     /things              ->  index
  * POST    /things              ->  create
- * GET     /things/:id          ->  show
  * PUT     /things/:id          ->  update
  * DELETE  /things/:id          ->  destroy
  */
@@ -18,15 +17,6 @@ exports.index = function(req, res) {
   FilterMatrix.find().sort({name: 1}).exec(function (err, filterMatrices) {
     if(err) { return handleError(res, err); }
     return res.json(200, filterMatrices);
-  });
-};
-
-// Get a single thing
-exports.show = function(req, res) {
-  FilterMatrix.findById(req.params.id, function (err, filterMatrix) {
-    if(err) { return handleError(res, err); }
-    if(!filterMatrix) { return res.send(404); }
-    return res.json(filterMatrix);
   });
 };
 

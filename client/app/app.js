@@ -1,6 +1,7 @@
 'use strict';
 
 angular.module('spmApp', [
+	'LocalStorageModule',
 	'ngFileUpload',
 	'ui.router',
 	'ui.bootstrap',
@@ -8,34 +9,46 @@ angular.module('spmApp', [
 	'ngAnimate'
 ]).config(function($stateProvider, $urlRouterProvider, $locationProvider) {
 	$stateProvider
-		.state('topo-matrices', {
+		.state('app', {
+			template: '<ui-view></ui-view>',
+			abstract: true,
+			resolve: {
+				filterMatrices: function(FilterMatrices) {
+					return FilterMatrices.init();
+				}/*,
+				topoMatrices: function(TopoMatrices) {
+					return TopoMatrices.init();
+				}*/
+			}
+		})
+		.state('app.topo-matrices', {
 			url: '/',
-			templateUrl: 'app/topo-matrices.html',
+			templateUrl: 'app/topo-matrix/topo-matrices.html',
 			controller: 'TopoMatricesCtrl as topoMatricesCtrl'
 		})
-		.state('topo-matrix', {
+		.state('app.topo-matrix', {
 			url: '/topo-matrices/:id',
-			templateUrl: 'app/topo-matrix.html',
+			templateUrl: 'app/topo-matrix/topo-matrix.html',
 			controller: 'TopoMatrixCtrl as topoMatrixCtrl'
 		})
-		.state('filter-matrices', {
+		.state('app.filter-matrices', {
 			url: '/filter-matrices',
-			templateUrl: 'app/filter-matrices.html',
+			templateUrl: 'app/filter-matrix/filter-matrices.html',
 			controller: 'FilterMatricesCtrl as filterMatricesCtrl'
 		})
-		.state('filter-matrix', {
+		.state('app.filter-matrix', {
 			url: '/filter-matrices/:id',
-			templateUrl: 'app/filter-matrix.html',
+			templateUrl: 'app/filter-matrix/filter-matrix.html',
 			controller: 'FilterMatrixCtrl as filterMatrixCtrl'
 		})
-		.state('new-topo-matrix', {
+		.state('app.new-topo-matrix', {
 			url: '/new-topo-matrix',
-			templateUrl: 'app/new-topo-matrix.html',
+			templateUrl: 'app/new-topo-matrix/new-topo-matrix.html',
 			controller: 'NewTopoMatrixCtrl as newTopoMatrixCtrl'
 		})
-		.state('settings', {
+		.state('app.settings', {
 			url: '/settings',
-			templateUrl: 'app/settings.html',
+			templateUrl: 'app/settings/settings.html',
 			controller: 'SettingsCtrl as settingsCtrl'
 		});
 

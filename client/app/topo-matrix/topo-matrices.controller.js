@@ -41,7 +41,7 @@ angular.module('spmApp').controller('TopoMatricesCtrl', function($http, $state, 
 		SelectedTopoMatrix.value = topoMatrix;
 	};
 
-	ctrl.remove = function(topoMatrixToDelete) {
+	ctrl.destroy = function(topoMatrixToDelete) {
 		$http.delete('/api/topo-matrices/' + topoMatrixToDelete._id).success(function() {
 			var removedTopoMatrices = _.remove(ctrl.topoMatrices, function(topoMatrix) {
 				return topoMatrix._id === topoMatrixToDelete._id;

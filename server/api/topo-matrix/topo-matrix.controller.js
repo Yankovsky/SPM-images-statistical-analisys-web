@@ -21,15 +21,6 @@ exports.index = function(req, res) {
   });
 };
 
-// Get a single thing
-exports.show = function(req, res) {
-  TopoMatrix.findById(req.params.id, function (err, topoMatrix) {
-    if(err) { return handleError(res, err); }
-    if(!topoMatrix) { return res.send(404); }
-    return res.json(topoMatrix);
-  });
-};
-
 // Creates a new thing in the DB.
 exports.create = function(req, res) {
   if (_.isString(req.body.data)) {
