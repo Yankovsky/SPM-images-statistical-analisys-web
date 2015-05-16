@@ -6,7 +6,7 @@ angular.module('spmApp').controller('TopoMatrixCtrl', function($state, $statePar
 	ctrl.topoMatrix = TopoMatrices.show($stateParams.id);
 	if (!ctrl.topoMatrix) {
 		$flash('Topo matrix with id ' + $stateParams.id + ' is not found.', {type: 'error'});
-		$state.go('app.topo-matrices', null, {location: 'replace'})
+		$state.go('app.topo-matrices', null, {location: 'replace'});
 	}
 
 	ctrl.save = function() {

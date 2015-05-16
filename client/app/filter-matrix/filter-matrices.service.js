@@ -9,7 +9,7 @@ angular.module('spmApp').factory('FilterMatrices', function($http, localStorageS
 	}
 
 	function isSelected(filterMatrix) {
-		return filterMatrix == selectedFilterMatrix;
+		return filterMatrix === selectedFilterMatrix;
 	}
 
 	return {
@@ -18,9 +18,9 @@ angular.module('spmApp').factory('FilterMatrices', function($http, localStorageS
 				filterMatrices = filterMatricesFromServer;
 				var idFromLocalStorage = localStorageService.get('selectedFilterMatrixId');
 				select(idFromLocalStorage && _.find(filterMatrices, function(filterMatrix) {
-					return filterMatrix._id == idFromLocalStorage
+					return filterMatrix._id === idFromLocalStorage;
 				}) || filterMatrices[0]);
-			})
+			});
 		},
 		getSelected: function() {
 			return selectedFilterMatrix;
@@ -32,8 +32,8 @@ angular.module('spmApp').factory('FilterMatrices', function($http, localStorageS
 		},
 		show: function(filterMatrixId) {
 			return _.find(filterMatrices, function(filterMatrix) {
-				return filterMatrix._id == filterMatrixId;
-			})
+				return filterMatrix._id === filterMatrixId;
+			});
 		},
 		create: function(filterMatrix) {
 			return $http.post('/api/filter-matrices', filterMatrix).success(function(filterMatrix) {
@@ -56,5 +56,5 @@ angular.module('spmApp').factory('FilterMatrices', function($http, localStorageS
 				}
 			});
 		}
-	}
+	};
 });

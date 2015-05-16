@@ -9,7 +9,7 @@ angular.module('spmApp').factory('TopoMatrices', function($http, localStorageSer
 	}
 
 	function isSelected(topoMatrix) {
-		return topoMatrix == selectedTopoMatrix;
+		return topoMatrix === selectedTopoMatrix;
 	}
 
 	return {
@@ -18,9 +18,9 @@ angular.module('spmApp').factory('TopoMatrices', function($http, localStorageSer
 				topoMatrices = topoMatricesFromServer;
 				var idFromLocalStorage = localStorageService.get('selectedTopoMatrixId');
 				select(idFromLocalStorage && _.find(topoMatrices, function(topoMatrix) {
-					return topoMatrix._id == idFromLocalStorage
+					return topoMatrix._id === idFromLocalStorage;
 				}) || topoMatrices[0]);
-			})
+			});
 		},
 		getSelected: function() {
 			return selectedTopoMatrix;
@@ -32,8 +32,8 @@ angular.module('spmApp').factory('TopoMatrices', function($http, localStorageSer
 		},
 		show: function(topoMatrixId) {
 			return _.find(topoMatrices, function(topoMatrix) {
-				return topoMatrix._id == topoMatrixId;
-			})
+				return topoMatrix._id === topoMatrixId;
+			});
 		},
 		create: function(topoMatrix) {
 			return $http.post('/api/topo-matrices', topoMatrix).success(function(topoMatrix) {
@@ -56,5 +56,5 @@ angular.module('spmApp').factory('TopoMatrices', function($http, localStorageSer
 				}
 			});
 		}
-	}
+	};
 });
