@@ -5,8 +5,10 @@
 
 'use strict';
 
+var fs = require('fs');
+var matrixParser = require('../utils/matrix-parser');
 var FilterMatrix = require('../api/filter-matrix/filter-matrix.model');
-
+var TopoMatrix = require('../api/topo-matrix/topo-matrix.model');
 
 FilterMatrix.find({}).remove(function() {
   FilterMatrix.create({
@@ -35,5 +37,15 @@ FilterMatrix.find({}).remove(function() {
       [1,2,3,4,5],
       [1,2,3,4,5]
     ]
+  }, {
+    name: 'from file',
+    data: matrixParser(fs.readFileSync('./data/filter-matrix').toString(), '\n', ' ')
+  });
+});
+
+TopoMatrix.find({}).remove(function() {
+  TopoMatrix.create({
+    name: 'topo-matrix',
+    data: matrixParser(fs.readFileSync('./data/topo-matrix').toString(), '\n', '\t')
   });
 });

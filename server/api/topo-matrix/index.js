@@ -1,7 +1,7 @@
 'use strict';
 
 var express = require('express');
-var controller = require('./filter-matrix.controller');
+var controller = require('./topo-matrix.controller');
 
 var router = express.Router();
 

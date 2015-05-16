@@ -5,7 +5,7 @@ angular.module('spmApp').controller('FilterMatricesCtrl', function($http, $state
 
 	$http.get('/api/filter-matrices').success(function(filterMatrices) {
 		ctrl.filterMatrices = filterMatrices;
-		if (!SelectedFilterMatrix._id) {
+		if (!SelectedFilterMatrix.value._id) {
 			selectFirst();
 		}
 	});
@@ -30,14 +30,9 @@ angular.module('spmApp').controller('FilterMatricesCtrl', function($http, $state
 				fileReader.readAsText(file);
 				/*jshint loopfunc: true */
 				fileReader.onload = function(e) {
-					var data = _.map(e.target.result.split('\n'), function(row) {
-						return _.map(row.split(' '), function(cell) {
-							return +cell;
-						});
-					});
 					$http.post('/api/filter-matrices', {
 						name: file.name,
-						data: data
+						data: e.target.result
 					}).success(function(filterMatrix) {
 						ctrl.filterMatrices.push(filterMatrix);
 					});
@@ -77,11 +72,5 @@ angular.module('spmApp').controller('FilterMatricesCtrl', function($http, $state
 				[0, 0, 0]
 			]
 		}).success(createSuccess);
-	};
-
-	ctrl.save = function() {
-		$http.put('/api/filter-matrices/' + ctrl.selectedFilterMatrix._id, ctrl.selectedFilterMatrix).success(function() {
-			window.alert('Saved');
-		});
 	};
 });

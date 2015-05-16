@@ -1,4 +1,15 @@
-<input type="file" name="file" ng-model="topoMatrixCtrl.file" onchange="angular.element(this).scope().uploadFile()"/>
+<div class="topo-matrix">
+    <form class="form-horizontal">
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="name">Name</label>
 
-<div>Filter matrix: {{topoMatrixCtrl.SelectedFilterMatrix.value}}</div>
-<a ui-sref="filter-matrices">Select other filter matrix</a>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="name" placeholder="Enter name"
+                       ng-model="topoMatrixCtrl.topoMatrix.name">
+            </div>
+        </div>
+    </form>
+
+    <button class="btn btn-primary" ng-click="topoMatrixCtrl.save()">Save topo matrix</button>
+    <a class="btn btn-link" ui-sref="topo-matrices">Back to topo matrices list</a>
+</div>

@@ -1,3 +1,7 @@
+.topo-matrices .title {
+    line-height: 35px;
+}
+
 .filter-matrices .title {
     line-height: 35px;
 }
@@ -9,10 +13,6 @@
 .filter-matrix .input-group[class*="col-"] {
     padding-right: 15px;
     padding-left: 15px;
-}
-
-.filter-matrix table {
-
 }
 
 .pre-line {

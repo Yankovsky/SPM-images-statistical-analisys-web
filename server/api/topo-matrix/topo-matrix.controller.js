@@ -11,56 +11,56 @@
 
 var _ = require('lodash');
 var matrixParser = require('../../utils/matrix-parser');
-var FilterMatrix = require('./filter-matrix.model');
+var TopoMatrix = require('./topo-matrix.model');
 
 // Get list of things
 exports.index = function(req, res) {
-  FilterMatrix.find().sort({name: 1}).exec(function (err, filterMatrices) {
+  TopoMatrix.find(function (err, topoMatrices) {
     if(err) { return handleError(res, err); }
-    return res.json(200, filterMatrices);
+    return res.json(200, topoMatrices);
   });
 };
 
 // Get a single thing
 exports.show = function(req, res) {
-  FilterMatrix.findById(req.params.id, function (err, filterMatrix) {
+  TopoMatrix.findById(req.params.id, function (err, topoMatrix) {
     if(err) { return handleError(res, err); }
-    if(!filterMatrix) { return res.send(404); }
-    return res.json(filterMatrix);
+    if(!topoMatrix) { return res.send(404); }
+    return res.json(topoMatrix);
   });
 };
 
 // Creates a new thing in the DB.
 exports.create = function(req, res) {
   if (_.isString(req.body.data)) {
-    req.body.data = matrixParser(req.body.data, '\n', ' ')
+    req.body.data = matrixParser(req.body.data, '\n', '\t')
   }
-  FilterMatrix.create(req.body, function(err, filterMatrix) {
+  TopoMatrix.create(req.body, function(err, topoMatrix) {
     if(err) { return handleError(res, err); }
-    return res.json(201, filterMatrix);
+    return res.json(201, topoMatrix);
   });
 };
 
 // Updates an existing thing in the DB.
 exports.update = function(req, res) {
   if(req.body._id) { delete req.body._id; }
-  FilterMatrix.findById(req.params.id, function (err, filterMatrix) {
+  TopoMatrix.findById(req.params.id, function (err, topoMatrix) {
     if (err) { return handleError(res, err); }
-    if(!filterMatrix) { return res.send(404); }
-    _.extend(filterMatrix, req.body);
-    filterMatrix.save(function (err) {
+    if(!topoMatrix) { return res.send(404); }
+    _.extend(topoMatrix, req.body);
+    topoMatrix.save(function (err) {
       if (err) { return handleError(res, err); }
-      return res.json(200, filterMatrix);
+      return res.json(200, topoMatrix);
     });
   });
 };
 
 // Deletes a thing from the DB.
 exports.destroy = function(req, res) {
-  FilterMatrix.findById(req.params.id, function (err, filterMatrix) {
+  TopoMatrix.findById(req.params.id, function (err, topoMatrix) {
     if(err) { return handleError(res, err); }
-    if(!filterMatrix) { return res.send(404); }
-    filterMatrix.remove(function(err) {
+    if(!topoMatrix) { return res.send(404); }
+    topoMatrix.remove(function(err) {
       if(err) { return handleError(res, err); }
       return res.send(204);
     });

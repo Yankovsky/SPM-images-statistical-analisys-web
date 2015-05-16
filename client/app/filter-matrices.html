@@ -1,16 +1,16 @@
 <div class="filter-matrices">
     <div class="bs-callout bs-callout-primary">
         <h4>Filter matrices upload</h4>
-        <p class="pre-line">
+        <pre class="pre-line">
             Uploaded filter matrices should be in following format:
             1 2 3
             0 0 0
             -3 2 10
-        </p>
+        </pre>
     </div>
 
     <ul class="list-group">
-        <li class="list-group-item" role="presentation" ng-repeat="fm in filterMatricesCtrl.filterMatrices" ng-class="{active: filterMatricesCtrl.isSelected(fm)}">
+        <li class="list-group-item" ng-repeat="fm in filterMatricesCtrl.filterMatrices" ng-class="{active: filterMatricesCtrl.isSelected(fm)}">
             <span class="title">{{fm.name}}</span>
             <div class="btn-group pull-right">
                 <a class="btn btn-default" ui-sref="filter-matrix({id: fm._id})">View</a>

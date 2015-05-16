@@ -1,10 +1,15 @@
 'use strict';
 
-angular.module('spmApp').controller('TopoMatrixCtrl', function(SelectedFilterMatrix) {
+angular.module('spmApp').controller('TopoMatrixCtrl', function($http, $stateParams) {
 	var ctrl = this;
 
-	ctrl.SelectedFilterMatrix = SelectedFilterMatrix;
+	$http.get('/api/topo-matrices/' + $stateParams.id).success(function(topoMatrix) {
+		ctrl.topoMatrix = topoMatrix;
+	});
 
-	ctrl.uploadFile = function() {
+	ctrl.save = function() {
+		$http.put('/api/topo-matrices/' + ctrl.topoMatrix._id, ctrl.topoMatrix).success(function() {
+			window.alert('Saved');
+		});
 	};
 });
