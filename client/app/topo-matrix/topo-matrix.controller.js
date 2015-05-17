@@ -1,7 +1,21 @@
 'use strict';
 
-angular.module('spmApp').controller('TopoMatrixCtrl', function($state, $stateParams, $flash, TopoMatrices) {
+angular.module('spmApp').controller('TopoMatrixCtrl', function($state, $stateParams, $flash, TopoMatrices, $timeout) {
 	var ctrl = this;
+
+	var $slider, $connect;
+	function onSlide(e, range) {
+		if (!$slider || !$slider.length) {
+			$slider = $('.noUi-target');
+		}
+		if (!$connect || !$connect.length) {
+			$connect = $('.noUi-origin.noUi-connect')
+		}
+		var width = (range[1] - range[0]) / (ctrl.topoMatrix.data.max - ctrl.topoMatrix.data.min) * $slider.width();
+		$connect.css({
+			background: 'linear-gradient(to right, black, white ' + width + 'px)'
+		});
+	}
 
 	ctrl.topoMatrix = TopoMatrices.show($stateParams.id);
 	if (!ctrl.topoMatrix) {
@@ -10,12 +24,19 @@ angular.module('spmApp').controller('TopoMatrixCtrl', function($state, $statePar
 	} else {
 		ctrl.topoMatrix.from = ctrl.topoMatrix.from || ctrl.topoMatrix.data.min;
 		ctrl.topoMatrix.to = ctrl.topoMatrix.to || ctrl.topoMatrix.data.max;
+		ctrl.range = [ctrl.topoMatrix.from, ctrl.topoMatrix.to];
 		ctrl.sliderOptions = {
 			connect: true,
 			range: {
 				min: ctrl.topoMatrix.data.min,
 				max: ctrl.topoMatrix.data.max
 			}
+		};
+		$timeout(function() {
+			onSlide(null, ctrl.range);
+		});
+		ctrl.sliderEvents = {
+			slide: onSlide
 		};
 	}
 
