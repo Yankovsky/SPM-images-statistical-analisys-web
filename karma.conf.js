@@ -21,6 +21,7 @@ module.exports = function(config) {
       'client/bower_components/angular-local-storage/dist/angular-local-storage.js',
       'client/bower_components/angular-flash/dist/angular-flash.js',
       'client/bower_components/angular-sanitize/angular-sanitize.js',
+      'client/bower_components/nouislider-angular/nouislider.js',
       'client/bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
       'client/bower_components/lodash/lodash.js',
       'client/app/app.js',
