@@ -46,5 +46,8 @@ TopoMatrix.find({}).remove(function() {
   TopoMatrix.create({
     name: 'topo-matrix',
     data: fs.readFileSync('./data/topo-matrix').toString()
+  }, {
+    name: 'topo-matrix2',
+    data: fs.readFileSync('./data/topo-matrix2').toString()
   });
 });

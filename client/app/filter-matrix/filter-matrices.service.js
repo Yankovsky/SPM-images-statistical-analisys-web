@@ -35,16 +35,20 @@ angular.module('spmApp').factory('FilterMatrices', function($http, localStorageS
 				return filterMatrix._id === filterMatrixId;
 			});
 		},
-		create: function(filterMatrix) {
-			return $http.post('/api/filter-matrices', filterMatrix).success(function(filterMatrix) {
+		create: function(filterMatrixToCreate) {
+			return $http.post('/api/filter-matrices', filterMatrixToCreate).success(function(filterMatrix) {
 				filterMatrices.push(filterMatrix);
 				if (!selectedFilterMatrix) {
 					select(filterMatrix);
 				}
 			});
 		},
-		update: function(filterMatrix) {
-			return $http.put('/api/filter-matrices/' + filterMatrix._id, filterMatrix);
+		update: function(filterMatrixToUpdate) {
+			return $http.put('/api/filter-matrices/' + filterMatrixToUpdate._id, filterMatrixToUpdate).success(function() {
+				_.extend(_.find(filterMatrices, function(filterMatrix) {
+					return filterMatrix._id === filterMatrixToUpdate._id;
+				}), filterMatrixToUpdate);
+			});
 		},
 		destroy: function(filterMatrixToDestroy) {
 			return $http.delete('/api/filter-matrices/' + filterMatrixToDestroy._id).success(function() {

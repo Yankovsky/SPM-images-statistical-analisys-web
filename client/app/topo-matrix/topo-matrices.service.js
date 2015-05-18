@@ -35,16 +35,20 @@ angular.module('spmApp').factory('TopoMatrices', function($http, localStorageSer
 				return topoMatrix._id === topoMatrixId;
 			});
 		},
-		create: function(topoMatrix) {
-			return $http.post('/api/topo-matrices', topoMatrix).success(function(topoMatrix) {
+		create: function(topoMatrixToCreate) {
+			return $http.post('/api/topo-matrices', topoMatrixToCreate).success(function(topoMatrix) {
 				topoMatrices.push(topoMatrix);
 				if (!selectedTopoMatrix) {
 					select(topoMatrix);
 				}
 			});
 		},
-		update: function(topoMatrix) {
-			return $http.put('/api/topo-matrices/' + topoMatrix._id, topoMatrix);
+		update: function(topoMatrixToUpdate) {
+			return $http.put('/api/topo-matrices/' + topoMatrixToUpdate._id, topoMatrixToUpdate).success(function() {
+				_.extend(_.find(topoMatrices, function(topoMatrix) {
+					return topoMatrix._id === topoMatrixToUpdate._id;
+				}), topoMatrixToUpdate);
+			});
 		},
 		destroy: function(topoMatrixToDestroy) {
 			return $http.delete('/api/topo-matrices/' + topoMatrixToDestroy._id).success(function() {

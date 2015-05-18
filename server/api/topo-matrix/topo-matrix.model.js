@@ -40,7 +40,8 @@ var TopoMatrixSchema = new Schema({
   min: Number,
   max: Number,
   from: Number,
-  to: Number
+  to: Number,
+  distance: Number
 });
 
 module.exports = mongoose.model('TopoMatrix', TopoMatrixSchema);

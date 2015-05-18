@@ -3,7 +3,7 @@
 angular.module('spmApp').controller('FilterMatrixCtrl', function($state, $stateParams, $flash, FilterMatrices) {
 	var ctrl = this;
 
-	ctrl.filterMatrix = FilterMatrices.show($stateParams.id);
+	ctrl.filterMatrix = _.cloneDeep(FilterMatrices.show($stateParams.id));
 	if (!ctrl.filterMatrix) {
 		$flash('Filter matrix with id ' + $stateParams.id + ' is not found.', {type: 'error'});
 		$state.go('app.filter-matrices', null, {location: 'replace'});
@@ -20,7 +20,7 @@ angular.module('spmApp').controller('FilterMatrixCtrl', function($state, $stateP
 	};
 
 	ctrl.save = function() {
-		FilterMatrices.update(ctrl.filterMatrix).then(function() {
+		FilterMatrices.update(ctrl.filterMatrix).success(function() {
 			$flash('Filter matrix "' + ctrl.filterMatrix.name + '" successfully updated!', {type: 'success'});
 		});
 	};
