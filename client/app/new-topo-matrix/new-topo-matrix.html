@@ -1,0 +1,11 @@
+<div>{{newTopoMatrixCtrl.range}}</div>
+
+<div range='newTopoMatrixCtrl.range'
+     no-ui-slider='newTopoMatrixCtrl.sliderOptions'
+     on-range-change="newTopoMatrixCtrl.calculateMatrixImageData()"></div>
+
+<matrix-image matrix-image-data='newTopoMatrixCtrl.matrixImageData'
+              matrix-size='newTopoMatrixCtrl.newTopoMatrix.data.value.length'></matrix-image>
+
+<matrix-image matrix-image-data='newTopoMatrixCtrl.bwMatrixImageData'
+              matrix-size='newTopoMatrixCtrl.newTopoMatrix.data.value.length'></matrix-image>

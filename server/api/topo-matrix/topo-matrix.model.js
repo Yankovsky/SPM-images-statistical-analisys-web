@@ -37,11 +37,15 @@ var TopoMatrixSchema = new Schema({
       return _.extend({value: value}, calculateMinMax(value));
     }
   },
-  min: Number,
-  max: Number,
   from: Number,
   to: Number,
   distance: Number
+});
+
+TopoMatrixSchema.pre('save', function (next) {
+  this.from = this.from || this.data.min;
+  this.to = this.to || this.data.max;
+  next();
 });
 
 module.exports = mongoose.model('TopoMatrix', TopoMatrixSchema);

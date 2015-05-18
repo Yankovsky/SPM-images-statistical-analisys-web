@@ -40,12 +40,15 @@
         </label>
     </div>
 
+    <div>{{topoMatrixCtrl.range}}</div>
+
     <div range='topoMatrixCtrl.range'
          no-ui-slider='topoMatrixCtrl.sliderOptions'
-         on-range-change="topoMatrixCtrl.drawFilteredTopoMatrixImage()"
-         on-init="topoMatrixCtrl.drawFilteredTopoMatrixImage()"></div>
+         on-range-change="topoMatrixCtrl.calculateMatrixImageData()"></div>
 
-    <canvas id='topo-matrix-canvas' ng-class="{'fit-in-page': topoMatrixCtrl.fitInPage}"></canvas>
+    <matrix-image matrix-image-data='topoMatrixCtrl.matrixImageData'
+                  matrix-size='topoMatrixCtrl.topoMatrix.data.value.length'
+                  ng-class="{'fit-in-page': topoMatrixCtrl.fitInPage}"></matrix-image>
 
     <button class="btn btn-primary" ng-click="topoMatrixCtrl.save()">Save topo matrix</button>
     <a class="btn btn-link" ui-sref="app.topo-matrices">Back to topo matrices list</a>

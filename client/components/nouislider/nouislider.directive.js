@@ -8,8 +8,7 @@ angular.module('ya.nouislider', []).value('noUiSliderConfig', {}).directive('noU
 		scope: {
 			range: '=',
 			noUiSlider: '=',
-			onRangeChange: '&',
-			onInit: '&'
+			onRangeChange: '&'
 		},
 		link: function(scope, element) {
 			if (!scope.range) {
@@ -42,9 +41,6 @@ angular.module('ya.nouislider', []).value('noUiSliderConfig', {}).directive('noU
 				});
 			});
 			element.noUiSlider(options);
-			if (scope.onInit) {
-				scope.onInit();
-			}
 		}
 	};
 });

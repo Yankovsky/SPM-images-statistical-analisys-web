@@ -45,9 +45,11 @@ FilterMatrix.find({}).remove(function() {
 TopoMatrix.find({}).remove(function() {
   TopoMatrix.create({
     name: 'topo-matrix',
+    distance: 5,
     data: fs.readFileSync('./data/topo-matrix').toString()
   }, {
     name: 'topo-matrix2',
+    distance: 10,
     data: fs.readFileSync('./data/topo-matrix2').toString()
   });
 });
