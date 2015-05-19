@@ -18,7 +18,6 @@ angular.module('ya.nouislider', []).directive('noUiSlider', function() {
 				if (!$connect || !$connect.length) {
 					$connect = element.find('.noUi-origin.noUi-connect');
 				}
-				console.log((range[1] - range[0]) / (options.range.max - options.range.min), element.width())
 				var width = (range[1] - range[0]) / (options.range.max - options.range.min) * element.width();
 				$connect.css({
 					background: 'linear-gradient(to right, black, white ' + width + 'px)'

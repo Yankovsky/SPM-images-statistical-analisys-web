@@ -28,12 +28,13 @@ angular.module('spmApp').directive('matrixImage', function() {
 				canvasContext.putImageData(scope.matrixImageFunction()(scope.matrix), 0, 0);
 			};
 
+			// move to controller
 			if (scope.sliderDisabled) {
 				scope.$watchCollection(function() {
 					return [scope.matrix.from, scope.matrix.to];
 				}, function() {
 					scope.updateImageData();
-				})
+				});
 			}
 		}
 	};
