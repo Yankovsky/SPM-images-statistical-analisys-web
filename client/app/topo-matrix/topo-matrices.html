@@ -1,27 +1,35 @@
-<div class="topo-matrices">
-    <div class="bs-callout bs-callout-primary">
-        <h4>Topo matrices upload</h4>
-        <pre class="pre-line">
-            Uploaded filter matrices should be in following format:
-            1&#09;2&#09;3
-            0&#09;0&#09;0
-            -3&#09;2&#09;10
-            Notice, that "tab" character is used as column delimiter
-        </pre>
-    </div>
+<div class="container topo-matrices">
+    <div class="row">
+        <div class="bs-callout bs-callout-primary">
+            <h4>Topo matrices upload</h4>
+            <pre class="pre-line">
+                Uploaded filter matrices should be in following format:
+                1&#09;2&#09;3
+                0&#09;0&#09;0
+                -3&#09;2&#09;10
+                Notice, that "tab" character is used as column delimiter
+            </pre>
+        </div>
 
-    <ul class="list-group">
-        <li class="list-group-item" ng-repeat="tm in topoMatricesCtrl.topoMatrices" ng-class="{active: topoMatricesCtrl.isSelected(tm)}">
-            <span class="title">{{tm.name}}</span>
-            <div class="btn-group pull-right">
-                <a class="btn btn-default" ui-sref="app.topo-matrix({id: tm._id})">Edit</a>
-                <button class="btn btn-default" ng-click="topoMatricesCtrl.select(tm)" ng-if="!topoMatricesCtrl.isSelected(tm)">Select</button>
-                <button class="btn btn-default" ng-click="topoMatricesCtrl.destroy(tm)">Delete</button>
-            </div>
-        </li>
-    </ul>
+        <ul class="list-group">
+            <li class="list-group-item" ng-repeat="tm in topoMatricesCtrl.topoMatrices"
+                ng-class="{active: topoMatricesCtrl.isSelected(tm)}">
+                <span class="title">{{tm.name}}</span>
 
-    <div class="btn-group">
-        <button class="btn btn-default" ngf-select ngf-change="topoMatricesCtrl.upload($files)">Upload topo matrix from file</button>
+                <div class="btn-group pull-right">
+                    <a class="btn btn-default" ui-sref="app.topo-matrix({id: tm._id})">Edit</a>
+                    <button class="btn btn-default" ng-click="topoMatricesCtrl.select(tm)"
+                            ng-if="!topoMatricesCtrl.isSelected(tm)">Select
+                    </button>
+                    <button class="btn btn-default" ng-click="topoMatricesCtrl.destroy(tm)">Delete</button>
+                </div>
+            </li>
+        </ul>
+
+        <div class="btn-group">
+            <button class="btn btn-default" ngf-select ngf-change="topoMatricesCtrl.upload($files)">Upload topo matrix
+                from file
+            </button>
+        </div>
     </div>
 </div>

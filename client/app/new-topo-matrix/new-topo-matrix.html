@@ -1,14 +1,16 @@
-<div class="new-topo-matrix">
-    <matrix-image class='col-md-4'
-              matrix="newTopoMatrixCtrl.topoMatrix"
-              matrix-image-function="newTopoMatrixCtrl.MatrixImage.grayscale"></matrix-image>
+<div class="container-fluid new-topo-matrix">
+    <div class="row-fluid">
+        <matrix-image class='col-md-4'
+                      matrix="newTopoMatrixCtrl.topoMatrix"
+                      matrix-image-function="newTopoMatrixCtrl.MatrixImage.grayscale"></matrix-image>
 
-    <matrix-image class='col-md-4'
-                  matrix="newTopoMatrixCtrl.newTopoMatrix"
-                  matrix-image-function="newTopoMatrixCtrl.MatrixImage.grayscale"></matrix-image>
+        <matrix-image class='col-md-4'
+                      matrix="newTopoMatrixCtrl.newTopoMatrix"
+                      matrix-image-function="newTopoMatrixCtrl.MatrixImage.grayscale"></matrix-image>
 
-    <matrix-image class='col-md-4'
-                  matrix="newTopoMatrixCtrl.newTopoMatrix"
-                  matrix-image-function="newTopoMatrixCtrl.MatrixImage.blackWhite"
-                  slider-disabled="true"></matrix-image>
+        <matrix-image class='col-md-4 no-slider'
+                      matrix="newTopoMatrixCtrl.newTopoMatrix"
+                      matrix-image-function="newTopoMatrixCtrl.MatrixImage.blackWhite"
+                      slider-disabled="true"></matrix-image>
+    </div>
 </div>

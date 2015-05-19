@@ -1,9 +1,26 @@
-.topo-matrices .title {
-    line-height: 35px;
+.pre-line {
+    white-space: pre-line
+}
+
+.noUi-base {
+    background: #000;
+}
+
+.noUi-target {
+    margin: 15px;
+}
+
+canvas {
+    display: block;
+    margin: 15px 0;
 }
 
 .fit-in-page canvas {
     width: 100%;
+}
+
+.topo-matrices .title {
+    line-height: 35px;
 }
 
 .filter-matrices .title {
@@ -19,12 +36,8 @@
     padding-left: 15px;
 }
 
-.pre-line {
-    white-space: pre-line
-}
-
-.noUi-base {
-    background: #000;
+.new-topo-matrix .no-slider {
+    margin-top: 67px;
 }
 
 .new-topo-matrix canvas {

@@ -1,8 +1,10 @@
 'use strict';
 
-angular.module('spmApp').factory('NewTopoMatrix', function(TopoMatrices, FilterMatrices) {
+angular.module('spmApp').factory('NewTopoMatrix', function(TopoMatrices, FilterMatrices, cfpLoadingBar) {
 	return {
 		getCurrent: function() {
+			// Start loading bar here, because this operation can take some time
+			cfpLoadingBar.start();
 			var topoMatrixData = TopoMatrices.getSelected().data.value;
 			var filterMatrixData = FilterMatrices.getSelected().data;
 			var topoMatrixSize = topoMatrixData.length;
@@ -27,7 +29,7 @@ angular.module('spmApp').factory('NewTopoMatrix', function(TopoMatrices, FilterM
 				}
 				matrixData[n - filterMatrixSize + 1] = row;
 			}
-
+			cfpLoadingBar.complete();
 			return {
 				from: min,
 				to: max,
