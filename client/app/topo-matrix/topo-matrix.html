@@ -21,7 +21,7 @@
 
             <div class="col-sm-10">
                 <input step="0.1" type="number" class="form-control" id="from" placeholder="Enter from value"
-                       ng-model="topoMatrixCtrl.range[0]"/>
+                       ng-model="topoMatrixCtrl.topoMatrix.from"/>
             </div>
         </div>
         <div class="form-group">
@@ -29,7 +29,7 @@
 
             <div class="col-sm-10">
                 <input step="0.1" type="number" class="form-control" id="to" placeholder="Enter to value"
-                       ng-model="topoMatrixCtrl.range[1]"/>
+                       ng-model="topoMatrixCtrl.topoMatrix.to"/>
             </div>
         </div>
     </form>
@@ -40,14 +40,8 @@
         </label>
     </div>
 
-    <div>{{topoMatrixCtrl.range}}</div>
-
-    <div range='topoMatrixCtrl.range'
-         no-ui-slider='topoMatrixCtrl.sliderOptions'
-         on-range-change="topoMatrixCtrl.calculateMatrixImageData()"></div>
-
-    <matrix-image matrix-image-data='topoMatrixCtrl.matrixImageData'
-                  matrix-size='topoMatrixCtrl.topoMatrix.data.value.length'
+    <matrix-image matrix="topoMatrixCtrl.topoMatrix"
+                  matrix-image-function="topoMatrixCtrl.MatrixImage.grayscale"
                   ng-class="{'fit-in-page': topoMatrixCtrl.fitInPage}"></matrix-image>
 
     <button class="btn btn-primary" ng-click="topoMatrixCtrl.save()">Save topo matrix</button>

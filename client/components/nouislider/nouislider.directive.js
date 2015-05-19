@@ -1,43 +1,37 @@
 'use strict';
 
-angular.module('ya.nouislider', []).value('noUiSliderConfig', {}).directive('noUiSlider', function(noUiSliderConfig) {
-	noUiSliderConfig = noUiSliderConfig || {};
-
+angular.module('ya.nouislider', []).directive('noUiSlider', function() {
 	return {
 		restrict: 'A',
 		scope: {
-			range: '=',
+			from: '=',
+			to: '=',
 			noUiSlider: '=',
 			onRangeChange: '&'
 		},
 		link: function(scope, element) {
-			if (!scope.range) {
-				return;
-			}
-			var $slider, $connect;
-			scope.$watch(function() {
-				return scope.range;
-			}, function() {
-				element.val(scope.range);
-				if (!$slider || !$slider.length) {
-					$slider = $('.noUi-target');
-				}
+			var $connect;
+			scope.$watchCollection(function() {
+				return [scope.from, scope.to];
+			}, function(range) {
+				element.val(range);
 				if (!$connect || !$connect.length) {
-					$connect = $('.noUi-origin.noUi-connect');
+					$connect = element.find('.noUi-origin.noUi-connect');
 				}
-				var width = (scope.range[1] - scope.range[0]) / (options.range.max - options.range.min) * $slider.width();
+				console.log((range[1] - range[0]) / (options.range.max - options.range.min), element.width())
+				var width = (range[1] - range[0]) / (options.range.max - options.range.min) * element.width();
 				$connect.css({
 					background: 'linear-gradient(to right, black, white ' + width + 'px)'
 				});
 				if (scope.onRangeChange) {
 					scope.onRangeChange();
 				}
-			}, true);
-			var options = angular.extend({}, noUiSliderConfig, scope.noUiSlider, {start: scope.range});
+			});
+			var options = angular.extend({connect: true}, scope.noUiSlider, {start: [scope.from, scope.to]});
 			element.on('slide change', function(event, viewValue) {
 				scope.$apply(function() {
-					scope.range[0] = +viewValue[0];
-					scope.range[1] = +viewValue[1];
+					scope.from = +viewValue[0];
+					scope.to = +viewValue[1];
 				});
 			});
 			element.noUiSlider(options);

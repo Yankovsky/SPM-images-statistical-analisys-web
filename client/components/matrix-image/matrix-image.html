@@ -1,0 +1,9 @@
+<div>{{matrix.from}} - {{matrix.to}}</div>
+
+<div ng-if='!sliderDisabled'
+     no-ui-slider='sliderOptions'
+     from='matrix.from'
+     to='matrix.to'
+     on-range-change='updateImageData()'></div>
+
+<canvas></canvas>

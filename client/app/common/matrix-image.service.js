@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('spmApp').factory('MatrixImage', function() {
-	function createImageFromMatrixData(matrixData, callback) {
+	function createImageFromMatrixData(matrix, callback) {
+		var matrixData = matrix.data.value;
 		var size = matrixData.length;
 		var imageData = new window.ImageData(size, size);
 		for (var row = 0; row < size; ++row) {
@@ -14,20 +15,20 @@ angular.module('spmApp').factory('MatrixImage', function() {
 	}
 
 	return {
-		grayscale: function(matrixData, range) {
-			return createImageFromMatrixData(matrixData, function(matrixValue, imageData, i) {
-				var colorValue = (matrixValue - range[0]) / (range[1] - range[0]) * 255;
+		grayscale: function(matrix) {
+			return createImageFromMatrixData(matrix, function(matrixValue, imageData, i) {
+				var colorValue = (matrixValue - matrix.from) / (matrix.to - matrix.from) * 255;
 				var limitedColorValue = parseInt(colorValue > 0 ? (colorValue < 255 ? colorValue : 255) : 0);
 				imageData.data[i] = imageData.data[i + 1] = imageData.data[i + 2] = limitedColorValue;
 				imageData.data[i + 3] = 255;
 			});
 		},
-		blackWhite: function(matrixData, range) {
-			var threshold = (range[0] + range[1]) / 2;
-			return createImageFromMatrixData(matrixData, function(matrixValue, imageData, i) {
+		blackWhite: function(matrix) {
+			var threshold = (matrix.from + matrix.to) / 2;
+			return createImageFromMatrixData(matrix, function(matrixValue, imageData, i) {
 				imageData.data[i] = imageData.data[i + 1] = imageData.data[i + 2] = matrixValue > threshold ? 255 : 0;
 				imageData.data[i + 3] = 255;
 			});
 		}
-	}
+	};
 });

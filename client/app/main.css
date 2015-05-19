@@ -2,7 +2,7 @@
     line-height: 35px;
 }
 
-.topo-matrix .fit-in-page canvas {
+.fit-in-page canvas {
     width: 100%;
 }
 
@@ -25,4 +25,8 @@
 
 .noUi-base {
     background: #000;
+}
+
+.new-topo-matrix canvas {
+    width: 100%;
 }

@@ -1,11 +1,14 @@
-<div>{{newTopoMatrixCtrl.range}}</div>
+<div class="new-topo-matrix">
+    <matrix-image class='col-md-4'
+              matrix="newTopoMatrixCtrl.topoMatrix"
+              matrix-image-function="newTopoMatrixCtrl.MatrixImage.grayscale"></matrix-image>
 
-<div range='newTopoMatrixCtrl.range'
-     no-ui-slider='newTopoMatrixCtrl.sliderOptions'
-     on-range-change="newTopoMatrixCtrl.calculateMatrixImageData()"></div>
+    <matrix-image class='col-md-4'
+                  matrix="newTopoMatrixCtrl.newTopoMatrix"
+                  matrix-image-function="newTopoMatrixCtrl.MatrixImage.grayscale"></matrix-image>
 
-<matrix-image matrix-image-data='newTopoMatrixCtrl.matrixImageData'
-              matrix-size='newTopoMatrixCtrl.newTopoMatrix.data.value.length'></matrix-image>
-
-<matrix-image matrix-image-data='newTopoMatrixCtrl.bwMatrixImageData'
-              matrix-size='newTopoMatrixCtrl.newTopoMatrix.data.value.length'></matrix-image>
+    <matrix-image class='col-md-4'
+                  matrix="newTopoMatrixCtrl.newTopoMatrix"
+                  matrix-image-function="newTopoMatrixCtrl.MatrixImage.blackWhite"
+                  slider-disabled="true"></matrix-image>
+</div>
