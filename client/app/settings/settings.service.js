@@ -3,13 +3,19 @@
 angular.module('spmApp').factory('Settings', function(localStorageService) {
 	var settings = localStorageService.get('settings') || {};
 
-	return {
-		get: function(key) {
+	function createGetterSetterFunction(key) {
+		return function(value) {
+			if (arguments.length) {
+				settings[key] = value;
+				localStorageService.set('settings', settings);
+			}
 			return settings[key];
-		},
-		set: function(key, value) {
-			settings[key] = value;
-			localStorageService.set('settings', settings);
 		}
-	};
+	}
+
+	var availableSettings = ['fitInPage', 'horizontalLayout'];
+
+	return _.transform(availableSettings, function(memo, settingName) {
+		memo[settingName] = createGetterSetterFunction(settingName);
+	}, {});
 });

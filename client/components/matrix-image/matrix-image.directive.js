@@ -5,37 +5,22 @@ angular.module('spmApp').directive('matrixImage', function() {
 		restrict: 'E',
 		templateUrl: 'components/matrix-image/matrix-image.html',
 		scope: {
-			matrix: '=',
-			matrixImageFunction: '&',
-			sliderDisabled: '='
+			matrixImageData: '='
 		},
 		link: function(scope, element) {
 			var canvasElement = element.find('canvas')[0],
 				canvasContext = canvasElement.getContext('2d'),
-				size = scope.matrix.data.value.length;
+				// for matrix of size 2x2 imageData.length is equal to 16
+				size = Math.sqrt(scope.matrixImageData.data.length / 4);
 
 			canvasElement.width = size;
 			canvasElement.height = size;
 
-			scope.sliderOptions = {
-				range: {
-					min: scope.matrix.data.min,
-					max: scope.matrix.data.max
-				}
-			};
-
-			scope.updateImageData = function() {
-				canvasContext.putImageData(scope.matrixImageFunction()(scope.matrix), 0, 0);
-			};
-
-			// move to controller
-			if (scope.sliderDisabled) {
-				scope.$watchCollection(function() {
-					return [scope.matrix.from, scope.matrix.to];
-				}, function() {
-					scope.updateImageData();
-				});
-			}
+			scope.$watch(function() {
+				return scope.matrixImageData;
+			}, function(matrixImageData) {
+				canvasContext.putImageData(matrixImageData, 0, 0)
+			});
 		}
 	};
 });

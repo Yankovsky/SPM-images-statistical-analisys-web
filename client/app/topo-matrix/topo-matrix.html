@@ -21,14 +21,18 @@
 
         <div class="checkbox">
             <label>
-                <input type="checkbox" ng-model="topoMatrixCtrl.fitInPage" ng-change="topoMatrixCtrl.setFitInPage()">Fit
-                in page
+                <input type="checkbox" ng-model="topoMatrixCtrl.fitInPage"
+                       ng-change="topoMatrixCtrl.setFitInPage()">Fit in page
             </label>
         </div>
 
-        <matrix-image matrix="topoMatrixCtrl.topoMatrix"
-                      matrix-image-function="topoMatrixCtrl.MatrixImage.grayscale"
-                      ng-class="{'fit-in-page': topoMatrixCtrl.fitInPage}"></matrix-image>
+        <div class="matrix-container">
+            <matrix-image-slider matrix="::topoMatrixCtrl.topoMatrix"
+                                 on-range-change="topoMatrixCtrl.calculateMatrixImageData()"></matrix-image-slider>
+
+            <matrix-image matrix-image-data="topoMatrixCtrl.topoMatrixImageData"
+                          ng-class="{'fit-in-page': topoMatrixCtrl.fitInPage}"></matrix-image>
+        </div>
 
         <button class="btn btn-primary" ng-click="topoMatrixCtrl.save()">Save topo matrix</button>
         <a class="btn btn-link" ui-sref="app.topo-matrices">Back to topo matrices list</a>

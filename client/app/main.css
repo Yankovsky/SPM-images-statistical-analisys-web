@@ -12,7 +12,10 @@
 
 canvas {
     display: block;
-    margin: 15px 0;
+}
+
+.matrix-container {
+    margin-bottom: 10px;
 }
 
 .fit-in-page canvas {
@@ -37,9 +40,43 @@ canvas {
 }
 
 .new-topo-matrix .no-slider {
-    margin-top: 67px;
+    margin-top: 10px;
 }
 
-.new-topo-matrix canvas {
+.new-topo-matrix.horizontal-layout .no-slider {
+    margin-top: 82px;
+}
+
+.new-topo-matrix.horizontal-layout canvas {
     width: 100%;
 }
+
+.matrix-image-with-markers {
+    position: relative;
+}
+
+.matrix-image-blobs-container {
+    position: relative;
+    list-style: none;
+    margin: 0;
+}
+
+.matrix-image-blobs-container .blob {
+    position: absolute;
+    border: 1px solid magenta;
+    box-sizing: content-box;
+}
+
+.matrix-image-blobs-container .blob:hover {
+    border: 5px solid cyan;
+    margin: -5px -5px;
+}
+
+
+
+/*var scaleX = canvas.width / window.innerWidth;*/
+/*var scaleY = canvas.height / window.innerHeight;*/
+/*var scaleToFit = Math.min(scaleX, scaleY);*/
+
+/*stage.style.transformOrigin = "0 0";*/
+/*stage.style.transform = "scale("+scaleToFit+")";*/
