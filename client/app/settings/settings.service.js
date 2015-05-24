@@ -10,7 +10,7 @@ angular.module('spmApp').factory('Settings', function(localStorageService) {
 				localStorageService.set('settings', settings);
 			}
 			return settings[key];
-		}
+		};
 	}
 
 	var availableSettings = ['fitInPage', 'horizontalLayout'];

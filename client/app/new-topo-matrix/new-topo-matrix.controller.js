@@ -7,11 +7,11 @@ angular.module('spmApp').controller('NewTopoMatrixCtrl', function(TopoMatrices, 
 	ctrl.topoMatrix = TopoMatrices.getSelected();
 	ctrl.newTopoMatrix = NewTopoMatrix.getCurrent(ctrl.topoMatrix.data.value, filterMatrix.data);
 
-	tracking.ColorTracker.registerColor('white', function(r, g, b) {
+	window.tracking.ColorTracker.registerColor('white', function(r, g, b) {
 		return r === 255 && g === 255 && b === 255;
 	});
 
-	var tracker = new tracking.ColorTracker('white');
+	var tracker = new window.tracking.ColorTracker('white');
 	tracker.setMinDimension(0);
 	tracker.setMinGroupSize(1);
 	tracker.on('track', function(event) {
@@ -21,7 +21,7 @@ angular.module('spmApp').controller('NewTopoMatrixCtrl', function(TopoMatrices, 
 				height: blob.height + 1,
 				left: blob.x - 1,
 				top: blob.y - 1
-			}
+			};
 		});
 		ctrl.topoBlobs = _.map(ctrl.newTopoBlobs, function(blob) {
 			return {
@@ -29,7 +29,7 @@ angular.module('spmApp').controller('NewTopoMatrixCtrl', function(TopoMatrices, 
 				height: blob.height,
 				left: blob.left + filterMatrixSizeDividedByTwo,
 				top: blob.top + filterMatrixSizeDividedByTwo
-			}
+			};
 		});
 	});
 

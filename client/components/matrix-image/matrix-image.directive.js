@@ -19,7 +19,7 @@ angular.module('spmApp').directive('matrixImage', function() {
 			scope.$watch(function() {
 				return scope.matrixImageData;
 			}, function(matrixImageData) {
-				canvasContext.putImageData(matrixImageData, 0, 0)
+				canvasContext.putImageData(matrixImageData, 0, 0);
 			});
 		}
 	};
