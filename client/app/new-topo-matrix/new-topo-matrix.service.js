@@ -1,10 +1,8 @@
 'use strict';
 
-angular.module('spmApp').factory('NewTopoMatrix', function(TopoMatrices, FilterMatrices) {
+angular.module('spmApp').factory('NewTopoMatrix', function() {
 	return {
-		getCurrent: function() {
-			var topoMatrixData = TopoMatrices.getSelected().data.value;
-			var filterMatrixData = FilterMatrices.getSelected().data;
+		getCurrent: function(topoMatrixData, filterMatrixData) {
 			var topoMatrixSize = topoMatrixData.length;
 			var filterMatrixSize = filterMatrixData.length;
 			var newTopoMatrixSize = topoMatrixSize - filterMatrixSize;

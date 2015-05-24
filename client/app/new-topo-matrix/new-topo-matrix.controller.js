@@ -2,9 +2,10 @@
 
 angular.module('spmApp').controller('NewTopoMatrixCtrl', function(TopoMatrices, FilterMatrices, NewTopoMatrix, MatrixImage, Settings) {
 	var ctrl = this;
+	var filterMatrix = FilterMatrices.getSelected();
+	var filterMatrixSizeDividedByTwo = Math.floor(filterMatrix.data.length / 2);
 	ctrl.topoMatrix = TopoMatrices.getSelected();
-	ctrl.newTopoMatrix = NewTopoMatrix.getCurrent();
-
+	ctrl.newTopoMatrix = NewTopoMatrix.getCurrent(ctrl.topoMatrix.data.value, filterMatrix.data);
 
 	tracking.ColorTracker.registerColor('white', function(r, g, b) {
 		return r === 255 && g === 255 && b === 255;
@@ -14,7 +15,22 @@ angular.module('spmApp').controller('NewTopoMatrixCtrl', function(TopoMatrices, 
 	tracker.setMinDimension(0);
 	tracker.setMinGroupSize(1);
 	tracker.on('track', function(event) {
-		ctrl.newTopoBlobs = event.data;
+		ctrl.newTopoBlobs = _.map(event.data, function(blob) {
+			return {
+				width: blob.width + 1,
+				height: blob.height + 1,
+				left: blob.x - 1,
+				top: blob.y - 1
+			}
+		});
+		ctrl.topoBlobs = _.map(ctrl.newTopoBlobs, function(blob) {
+			return {
+				width: blob.width,
+				height: blob.height,
+				left: blob.left + filterMatrixSizeDividedByTwo,
+				top: blob.top + filterMatrixSizeDividedByTwo
+			}
+		});
 	});
 
 	ctrl.calculateTopoMatrixImageData = function() {

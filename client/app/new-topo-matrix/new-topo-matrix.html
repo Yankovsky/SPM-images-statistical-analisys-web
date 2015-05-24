@@ -13,8 +13,8 @@
                                  on-range-change="newTopoMatrixCtrl.calculateTopoMatrixImageData()"></matrix-image-slider>
             <ul class="matrix-image-blobs-container">
                 <li class='blob'
-                    ng-repeat="blob in newTopoMatrixCtrl.newTopoBlobs"
-                    ng-style="{width: blob.width + 1, height: blob.height + 1, left: blob.x - 1, top: blob.y - 1}">
+                    ng-repeat="blob in newTopoMatrixCtrl.topoBlobs"
+                    ng-style="::blob">
                 </li>
             </ul>
             <matrix-image matrix-image-data="newTopoMatrixCtrl.topoMatrixImageData"></matrix-image>
@@ -26,7 +26,7 @@
             <ul class="matrix-image-blobs-container">
                 <li class='blob'
                     ng-repeat="blob in newTopoMatrixCtrl.newTopoBlobs"
-                    ng-style="{width: blob.width + 1, height: blob.height + 1, left: blob.x - 1, top: blob.y - 1}">
+                    ng-style="::blob">
                 </li>
             </ul>
             <matrix-image matrix-image-data="newTopoMatrixCtrl.grayscaleNewTopoMatrixImageData"></matrix-image>
@@ -36,7 +36,7 @@
             <ul class="matrix-image-blobs-container">
                 <li class='blob'
                     ng-repeat="blob in newTopoMatrixCtrl.newTopoBlobs"
-                    ng-style="{width: blob.width + 1, height: blob.height + 1, left: blob.x - 1, top: blob.y - 1}">
+                    ng-style="::blob">
                 </li>
             </ul>
             <matrix-image matrix-image-data="newTopoMatrixCtrl.blackWhiteNewTopoMatrixImageData"></matrix-image>
