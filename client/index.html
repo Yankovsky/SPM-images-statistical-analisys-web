@@ -44,7 +44,7 @@
                 <div class="navbar-brand">SPM images statistical analysis</div>
                 <ul class="nav navbar-nav">
                     <li ng-repeat="tab in mainCtrl.tabs" ui-sref-active="active">
-                        <a ui-sref="{{tab.state}}">{{tab.name}}</a>
+                        <a ui-sref="{{::tab.state}}">{{::tab.name}}</a>
                     </li>
                 </ul>
             </div>
@@ -91,6 +91,7 @@
         <script src="app/new-topo-matrix/new-topo-matrix.service.js"></script>
         <script src="app/settings/settings.controller.js"></script>
         <script src="app/settings/settings.service.js"></script>
+        <script src="app/topo-matrix/blob-statistics.service.js"></script>
         <script src="app/topo-matrix/topo-matrices.controller.js"></script>
         <script src="app/topo-matrix/topo-matrices.service.js"></script>
         <script src="app/topo-matrix/topo-matrix.controller.js"></script>

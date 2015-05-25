@@ -70,9 +70,31 @@ canvas {
 .matrix-image-blobs-container .blob:hover {
     border: 5px solid cyan;
     margin: -5px -5px;
+    z-index: 1;
 }
 
+.matrix-image-blobs-container .blob .statistics {
+    display: none;
+    background: #ddd;
+    width: 150px;
+}
 
+.matrix-image-blobs-container .blob:hover .statistics {
+    display: block;
+}
+
+dl {
+    width: 100%;
+    overflow: hidden;
+}
+dt {
+    float: left;
+    width: 50%;
+}
+dd {
+    float: left;
+    width: 50%;
+}
 
 /*var scaleX = canvas.width / window.innerWidth;*/
 /*var scaleY = canvas.height / window.innerHeight;*/

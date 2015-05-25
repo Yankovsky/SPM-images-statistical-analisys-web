@@ -1,0 +1,10 @@
+<ul ng-repeat="(setting, settingName) in Settings">
+    <li>
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" ng-model="newTopoMatrixCtrl.horizontalLayout"
+                       ng-change="topoMatrixCtrl.setHorizontalLayout()">Horizontal layout
+            </label>
+        </div>
+    </li>
+</ul>

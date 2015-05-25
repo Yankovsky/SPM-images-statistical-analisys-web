@@ -6,6 +6,17 @@
                    ng-change="topoMatrixCtrl.setHorizontalLayout()">Horizontal layout
         </label>
     </div>
+    <div class="checkbox">
+        <label>
+            <input type="checkbox" ng-model="newTopoMatrixCtrl.findBlobsDynamically"
+                   ng-change="newTopoMatrixCtrl.setFindBlobsDynamically()">Find blobs dynamically
+        </label>
+    </div>
+    <button class="btn btn-primary"
+            ng-if='!newTopoMatrixCtrl.findBlobsDynamically'
+            ng-click="newTopoMatrixCtrl.findBlobs()">Find blobs</button>
+    <button class="btn btn-primary"
+            ng-click="newTopoMatrixCtrl.calculateStatisticsForAllBlobs()">Calculate statistics for all points</button>
 
     <div ng-class="{'row-fluid': newTopoMatrixCtrl.horizontalLayout, 'row': !newTopoMatrixCtrl.horizontalLayout}">
         <div class='matrix-container' ng-class="{'col-md-4': newTopoMatrixCtrl.horizontalLayout}">
@@ -13,8 +24,23 @@
                                  on-range-change="newTopoMatrixCtrl.calculateTopoMatrixImageData()"></matrix-image-slider>
             <ul class="matrix-image-blobs-container">
                 <li class='blob'
+                    ng-mouseenter="newTopoMatrixCtrl.calculateStatisticsForBlob(blob)"
                     ng-repeat="blob in newTopoMatrixCtrl.topoBlobs"
                     ng-style="::blob">
+                    <dl class="statistics">
+                        <dt>X</dt>
+                        <dd>{{blob.center.x}}</dd>
+                        <dt>Y</dt>
+                        <dd>{{blob.center.y}}</dd>
+                        <dt>Width</dt>
+                        <dd>{{blob.width}}</dd>
+                        <dt>Height</dt>
+                        <dd>{{blob.height}}</dd>
+                        <dt>Max</dt>
+                        <dd>{{blob.max}}</dd>
+                        <dt ng-if="blob.distanceToNearestNeighbor">Neighbor</dt>
+                        <dd>{{blob.distanceToNearestNeighbor}}</dd>
+                    </dl>
                 </li>
             </ul>
             <matrix-image matrix-image-data="newTopoMatrixCtrl.topoMatrixImageData"></matrix-image>

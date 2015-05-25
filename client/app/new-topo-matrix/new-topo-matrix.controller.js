@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('spmApp').controller('NewTopoMatrixCtrl', function(TopoMatrices, FilterMatrices, NewTopoMatrix, MatrixImage, Settings) {
+angular.module('spmApp').controller('NewTopoMatrixCtrl', function(TopoMatrices, FilterMatrices, NewTopoMatrix, MatrixImage, Settings, BlobStatistics) {
 	var ctrl = this;
 	var filterMatrix = FilterMatrices.getSelected();
 	var filterMatrixSizeDividedByTwo = Math.floor(filterMatrix.data.length / 2);
@@ -33,6 +33,26 @@ angular.module('spmApp').controller('NewTopoMatrixCtrl', function(TopoMatrices, 
 		});
 	});
 
+	ctrl.horizontalLayout = Settings.horizontalLayout();
+	ctrl.setHorizontalLayout = function() {
+		Settings.horizontalLayout(ctrl.horizontalLayout);
+	};
+
+	ctrl.findBlobsDynamically = Settings.findBlobsDynamically();
+	ctrl.setFindBlobsDynamically = function() {
+		if (ctrl.findBlobsDynamically) {
+			ctrl.findBlobs();
+		} else {
+			ctrl.newTopoBlobs = [];
+			ctrl.topoBlobs = [];
+		}
+		Settings.findBlobsDynamically(ctrl.findBlobsDynamically);
+	};
+
+	ctrl.findBlobs = function() {
+		tracker.track(ctrl.blackWhiteNewTopoMatrixImageData.data, ctrl.blackWhiteNewTopoMatrixImageData.width, ctrl.blackWhiteNewTopoMatrixImageData.height);
+	};
+
 	ctrl.calculateTopoMatrixImageData = function() {
 		ctrl.topoMatrixImageData = MatrixImage.grayscale(ctrl.topoMatrix);
 	};
@@ -41,12 +61,52 @@ angular.module('spmApp').controller('NewTopoMatrixCtrl', function(TopoMatrices, 
 	ctrl.calculateNewTopoMatricesImagesData = function() {
 		ctrl.grayscaleNewTopoMatrixImageData = MatrixImage.grayscale(ctrl.newTopoMatrix);
 		ctrl.blackWhiteNewTopoMatrixImageData = MatrixImage.blackWhite(ctrl.newTopoMatrix);
-		tracker.track(ctrl.blackWhiteNewTopoMatrixImageData.data, ctrl.blackWhiteNewTopoMatrixImageData.width, ctrl.blackWhiteNewTopoMatrixImageData.height);
+		if (ctrl.findBlobsDynamically) {
+			ctrl.findBlobs();
+		} else {
+			ctrl.newTopoBlobs = [];
+			ctrl.topoBlobs = [];
+		}
 	};
 	ctrl.calculateNewTopoMatricesImagesData();
 
-	ctrl.horizontalLayout = Settings.horizontalLayout();
-	ctrl.setHorizontalLayout = function() {
-		Settings.horizontalLayout(ctrl.horizontalLayout);
+	ctrl.calculateStatisticsForBlob = function(blob) {
+		if (!blob.max) {
+			var max = Number.NEGATIVE_INFINITY;
+			var iMax = blob.top + blob.height;
+			var jMax = blob.left + blob.width;
+			for (var i = blob.top; i < iMax; i++) {
+				for (var j = blob.left; j < jMax; j++) {
+					var value = ctrl.topoMatrix.data.value[i][j];
+					max = value > max ? value : max;
+				}
+			}
+			blob.max = max;
+			blob.center = {
+				x: blob.left + blob.width / 2,
+				y: blob.top + blob.height / 2
+			};
+		}
+	};
+
+	ctrl.calculateStatisticsForAllBlobs = function() {
+		var topoBlobsLength = ctrl.topoBlobs.length;
+		for (var i = 0; i < topoBlobsLength; i++) {
+			var blob = ctrl.topoBlobs[i];
+			ctrl.calculateStatisticsForBlob(blob);
+			blob.distanceToNearestNeighbor = Number.POSITIVE_INFINITY;
+			for (var j = 0; j < i; j++) {
+				var otherBlob = ctrl.topoBlobs[j];
+				var xPart = otherBlob.center.x - blob.center.x;
+				var yPart = otherBlob.center.y - blob.center.y;
+				var distance = xPart * xPart + yPart * yPart;
+				blob.distanceToNearestNeighbor = distance < blob.distanceToNearestNeighbor ? distance : blob.distanceToNearestNeighbor;
+				otherBlob.distanceToNearestNeighbor = distance < otherBlob.distanceToNearestNeighbor ? distance : otherBlob.distanceToNearestNeighbor;
+			}
+		}
+		for (var i = 0; i < topoBlobsLength; i++) {
+			var blob = ctrl.topoBlobs[i];
+			blob.distanceToNearestNeighbor = Math.sqrt(blob.distanceToNearestNeighbor);
+		}
 	};
 });

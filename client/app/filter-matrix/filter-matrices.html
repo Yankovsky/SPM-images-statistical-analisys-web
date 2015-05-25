@@ -13,7 +13,7 @@
         <ul class="list-group">
             <li class="list-group-item" ng-repeat="fm in filterMatricesCtrl.filterMatrices"
                 ng-class="{active: filterMatricesCtrl.isSelected(fm)}">
-                <span class="title">{{fm.name}}</span>
+                <span class="title">{{::fm.name}}</span>
 
                 <div class="btn-group pull-right">
                     <a class="btn btn-default" ui-sref="app.filter-matrix({id: fm._id})">View</a>

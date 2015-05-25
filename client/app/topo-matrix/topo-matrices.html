@@ -14,7 +14,7 @@
         <ul class="list-group">
             <li class="list-group-item" ng-repeat="tm in topoMatricesCtrl.topoMatrices"
                 ng-class="{active: topoMatricesCtrl.isSelected(tm)}">
-                <span class="title">{{tm.name}}</span>
+                <span class="title">{{::tm.name}}</span>
 
                 <div class="btn-group pull-right">
                     <a class="btn btn-default" ui-sref="app.topo-matrix({id: tm._id})">Edit</a>

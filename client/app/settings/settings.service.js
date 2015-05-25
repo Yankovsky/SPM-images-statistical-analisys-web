@@ -13,7 +13,7 @@ angular.module('spmApp').factory('Settings', function(localStorageService) {
 		};
 	}
 
-	var availableSettings = ['fitInPage', 'horizontalLayout'];
+	var availableSettings = ['fitInPage', 'horizontalLayout', 'findBlobsDynamically'];
 
 	return _.transform(availableSettings, function(memo, settingName) {
 		memo[settingName] = createGetterSetterFunction(settingName);
