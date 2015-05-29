@@ -17,6 +17,8 @@
             ng-click="newTopoMatrixCtrl.findBlobs()">Find blobs</button>
     <button class="btn btn-primary"
             ng-click="newTopoMatrixCtrl.calculateStatisticsForAllBlobs()">Calculate statistics for all points</button>
+    <button class="btn btn-primary"
+            ng-click="newTopoMatrixCtrl.exportStatistics()">Export</button>
 
     <div ng-class="{'row-fluid': newTopoMatrixCtrl.horizontalLayout, 'row': !newTopoMatrixCtrl.horizontalLayout}">
         <div class='matrix-container' ng-class="{'col-md-4': newTopoMatrixCtrl.horizontalLayout}">
