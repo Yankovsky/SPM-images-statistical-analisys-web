@@ -4,6 +4,7 @@ angular.module('spmApp').controller('NewTopoMatrixCtrl', function(TopoMatrices, 
 	var ctrl = this;
 	var filterMatrix = FilterMatrices.getSelected();
 	var filterMatrixSizeDividedByTwo = Math.floor(filterMatrix.data.length / 2);
+	ctrl.blobAreaExpansion = 0;
 	ctrl.topoMatrix = TopoMatrices.getSelected();
 	ctrl.newTopoMatrix = NewTopoMatrix.getCurrent(ctrl.topoMatrix.data.value, filterMatrix.data);
 
@@ -23,14 +24,7 @@ angular.module('spmApp').controller('NewTopoMatrixCtrl', function(TopoMatrices, 
 				top: blob.y - 1
 			};
 		});
-		ctrl.topoBlobs = _.map(ctrl.newTopoBlobs, function(blob) {
-			return {
-				width: blob.width,
-				height: blob.height,
-				left: blob.left + filterMatrixSizeDividedByTwo,
-				top: blob.top + filterMatrixSizeDividedByTwo
-			};
-		});
+		ctrl.calculateTopoBlobs();
 	});
 
 	function findBlobs() {
@@ -41,6 +35,17 @@ angular.module('spmApp').controller('NewTopoMatrixCtrl', function(TopoMatrices, 
 			ctrl.topoBlobs = [];
 		}
 	}
+
+	ctrl.calculateTopoBlobs = function() {
+		ctrl.topoBlobs = _.map(ctrl.newTopoBlobs, function(blob) {
+			return {
+				width: blob.width + 2 * ctrl.blobAreaExpansion,
+				height: blob.height + 2 * ctrl.blobAreaExpansion,
+				left: blob.left + filterMatrixSizeDividedByTwo - ctrl.blobAreaExpansion,
+				top: blob.top + filterMatrixSizeDividedByTwo - ctrl.blobAreaExpansion
+			};
+		});
+	};
 
 	ctrl.horizontalLayout = Settings.horizontalLayout();
 	ctrl.setHorizontalLayout = function() {

@@ -12,6 +12,11 @@
                    ng-change="newTopoMatrixCtrl.setFindBlobsDynamically()">Find blobs dynamically
         </label>
     </div>
+
+    <input type="number" class="form-control"
+           ng-model="newTopoMatrixCtrl.blobAreaExpansion"
+           ng-change="newTopoMatrixCtrl.calculateTopoBlobs()"/>
+
     <button class="btn btn-primary"
             ng-if='!newTopoMatrixCtrl.findBlobsDynamically'
             ng-click="newTopoMatrixCtrl.findBlobs()">Find blobs</button>
@@ -31,17 +36,17 @@
                     ng-style="::blob">
                     <dl class="statistics">
                         <dt>X</dt>
-                        <dd>{{blob.center.x}}</dd>
+                        <dd>{{::blob.center.x}}</dd>
                         <dt>Y</dt>
-                        <dd>{{blob.center.y}}</dd>
+                        <dd>{{::blob.center.y}}</dd>
                         <dt>Width</dt>
-                        <dd>{{blob.width}}</dd>
+                        <dd>{{::blob.width}}</dd>
                         <dt>Height</dt>
-                        <dd>{{blob.height}}</dd>
-                        <dt>Max</dt>
-                        <dd>{{blob.max}}</dd>
+                        <dd>{{::blob.height}}</dd>
+                        <dt>Max difference</dt>
+                        <dd>{{::blob.maxDifference}}</dd>
                         <dt ng-if="blob.distanceToNearestNeighbor">Neighbor</dt>
-                        <dd>{{blob.distanceToNearestNeighbor}}</dd>
+                        <dd>{{::blob.distanceToNearestNeighbor}}</dd>
                     </dl>
                 </li>
             </ul>
@@ -70,4 +75,23 @@
             <matrix-image matrix-image-data="newTopoMatrixCtrl.blackWhiteNewTopoMatrixImageData"></matrix-image>
         </div>
     </div>
+
+    <table class="table table-bordered" ng-if="newTopoMatrixCtrl.topoBlobs[0].distanceToNearestNeighbor">
+        <tr>
+            <th>X</th>
+            <th>Y</th>
+            <th>Width</th>
+            <th>Height</th>
+            <th>Max difference</th>
+            <th>Neighbor</th>
+        </tr>
+        <tr ng-repeat="blob in newTopoMatrixCtrl.topoBlobs">
+            <td>{{::blob.center.x}}</td>
+            <td>{{::blob.center.y}}</td>
+            <td>{{::blob.width}}</td>
+            <td>{{::blob.height}}</td>
+            <td>{{::blob.maxDifference}}</td>
+            <td>{{::blob.distanceToNearestNeighbor}}</td>
+        </tr>
+    </table>
 </div>

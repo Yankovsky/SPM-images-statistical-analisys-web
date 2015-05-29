@@ -76,7 +76,7 @@ canvas {
 .matrix-image-blobs-container .blob .statistics {
     display: none;
     background: #ddd;
-    width: 150px;
+    width: 220px;
 }
 
 .matrix-image-blobs-container .blob:hover .statistics {

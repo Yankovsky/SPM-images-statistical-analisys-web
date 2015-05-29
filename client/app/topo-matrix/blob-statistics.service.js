@@ -2,17 +2,22 @@
 
 angular.module('spmApp').factory('BlobStatistics', function() {
 	function getForOne(blob, matrixData) {
-		if (!blob.max) {
+		if (!blob.maxDifference) {
+			var matrixDataSize = matrixData.length - 1;
+			var min = Number.POSITIVE_INFINITY;
 			var max = Number.NEGATIVE_INFINITY;
-			var iMax = blob.top + blob.height;
-			var jMax = blob.left + blob.width;
-			for (var i = blob.top; i < iMax; i++) {
-				for (var j = blob.left; j < jMax; j++) {
+			var iMin = Math.max(blob.top, 0);
+			var iMax = Math.min(blob.top + blob.height, matrixDataSize);
+			var jMin = Math.max(blob.left, 0);
+			var jMax = Math.min(blob.left + blob.width, matrixDataSize);
+			for (var i = iMin; i < iMax; i++) {
+				for (var j = jMin; j < jMax; j++) {
 					var value = matrixData[i][j];
+					min = value < min ? value : min;
 					max = value > max ? value : max;
 				}
 			}
-			blob.max = max;
+			blob.maxDifference = max - min;
 			blob.center = {
 				x: blob.left + blob.width / 2,
 				y: blob.top + blob.height / 2
