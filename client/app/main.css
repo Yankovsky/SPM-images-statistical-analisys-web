@@ -95,10 +95,3 @@ dd {
     float: left;
     width: 50%;
 }
-
-/*var scaleX = canvas.width / window.innerWidth;*/
-/*var scaleY = canvas.height / window.innerHeight;*/
-/*var scaleToFit = Math.min(scaleX, scaleY);*/
-
-/*stage.style.transformOrigin = "0 0";*/
-/*stage.style.transform = "scale("+scaleToFit+")";*/

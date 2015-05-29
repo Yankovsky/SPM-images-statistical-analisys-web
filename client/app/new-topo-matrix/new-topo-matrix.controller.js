@@ -39,6 +39,8 @@ angular.module('spmApp').controller('NewTopoMatrixCtrl', function(TopoMatrices, 
 	ctrl.calculateTopoBlobs = function() {
 		ctrl.topoBlobs = _.map(ctrl.newTopoBlobs, function(blob) {
 			return {
+				realWidth: blob.width,
+				realHeight: blob.height,
 				width: blob.width + 2 * ctrl.blobAreaExpansion,
 				height: blob.height + 2 * ctrl.blobAreaExpansion,
 				left: blob.left + filterMatrixSizeDividedByTwo - ctrl.blobAreaExpansion,

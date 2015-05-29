@@ -40,9 +40,9 @@
                         <dt>Y</dt>
                         <dd>{{::blob.center.y}}</dd>
                         <dt>Width</dt>
-                        <dd>{{::blob.width}}</dd>
+                        <dd>{{::blob.realWidth}}</dd>
                         <dt>Height</dt>
-                        <dd>{{::blob.height}}</dd>
+                        <dd>{{::blob.realHeight}}</dd>
                         <dt>Max difference</dt>
                         <dd>{{::blob.maxDifference}}</dd>
                         <dt ng-if="blob.distanceToNearestNeighbor">Neighbor</dt>
@@ -78,6 +78,7 @@
 
     <table class="table table-bordered" ng-if="newTopoMatrixCtrl.topoBlobs[0].distanceToNearestNeighbor">
         <tr>
+            <th>#</th>
             <th>X</th>
             <th>Y</th>
             <th>Width</th>
@@ -86,10 +87,11 @@
             <th>Neighbor</th>
         </tr>
         <tr ng-repeat="blob in newTopoMatrixCtrl.topoBlobs">
+            <td>{{$index + 1}}</td>
             <td>{{::blob.center.x}}</td>
             <td>{{::blob.center.y}}</td>
-            <td>{{::blob.width}}</td>
-            <td>{{::blob.height}}</td>
+            <td>{{::blob.realWidth}}</td>
+            <td>{{::blob.realHeight}}</td>
             <td>{{::blob.maxDifference}}</td>
             <td>{{::blob.distanceToNearestNeighbor}}</td>
         </tr>
