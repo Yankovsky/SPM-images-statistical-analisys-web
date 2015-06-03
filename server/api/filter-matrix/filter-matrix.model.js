@@ -10,7 +10,7 @@ var FilterMatrixSchema = new Schema({
   data: {
     type: Array,
     set: function(value) {
-      return _.isString(value) ? matrixParser(value, '\n', ' ') : value;
+      return _.isString(value) ? matrixParser(value, '\n', /[^\S\n\r]+/) : value;
     }
   }
 });
