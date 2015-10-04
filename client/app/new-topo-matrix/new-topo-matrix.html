@@ -1,78 +1,115 @@
 <div class="new-topo-matrix"
      ng-class="{'container-fluid horizontal-layout': newTopoMatrixCtrl.horizontalLayout, 'container': !newTopoMatrixCtrl.horizontalLayout}">
-    <div class="checkbox">
-        <label>
-            <input type="checkbox" ng-model="newTopoMatrixCtrl.horizontalLayout"
-                   ng-change="topoMatrixCtrl.setHorizontalLayout()">Horizontal layout
-        </label>
-    </div>
-    <div class="checkbox">
-        <label>
-            <input type="checkbox" ng-model="newTopoMatrixCtrl.findBlobsDynamically"
-                   ng-change="newTopoMatrixCtrl.setFindBlobsDynamically()">Find blobs dynamically
-        </label>
-    </div>
 
-    <input type="number" class="form-control"
-           ng-model="newTopoMatrixCtrl.blobAreaExpansion"
-           ng-change="newTopoMatrixCtrl.calculateTopoBlobs()"/>
+    <form class="form-horizontal">
+        <div class="form-group">
+            <div class="col-sm-10">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" ng-model="newTopoMatrixCtrl.horizontalLayout"
+                               ng-change="topoMatrixCtrl.setHorizontalLayout()">Horizontal layout
+                    </label>
+                </div>
+            </div>
+        </div>
 
-    <button class="btn btn-primary"
-            ng-if='!newTopoMatrixCtrl.findBlobsDynamically'
-            ng-click="newTopoMatrixCtrl.findBlobs()">Find blobs</button>
-    <button class="btn btn-primary"
-            ng-click="newTopoMatrixCtrl.calculateStatisticsForAllBlobs()">Calculate statistics for all points</button>
-    <button class="btn btn-primary"
-            ng-click="newTopoMatrixCtrl.exportStatistics()">Export</button>
+        <div class="form-group">
+            <div class="col-sm-10">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" ng-model="newTopoMatrixCtrl.findBlobsDynamically"
+                               ng-change="newTopoMatrixCtrl.setFindBlobsDynamically()">Find blobs dynamically
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="blobAreaExpansion">Blob area expansion</label>
+
+            <div class="col-sm-10">
+
+                <input type="number"
+                       class="form-control"
+                       id="blobAreaExpansion"
+                       placeholder="Enter blob area expansion"
+                       ng-model="newTopoMatrixCtrl.blobAreaExpansion"
+                       ng-change="newTopoMatrixCtrl.calculateTopoBlobs()"/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-10">
+                <button class="btn btn-primary"
+                        ng-if='!newTopoMatrixCtrl.findBlobsDynamically'
+                        ng-click="newTopoMatrixCtrl.findBlobs()">Find blobs</button>
+                <button class="btn btn-primary"
+                        ng-click="newTopoMatrixCtrl.calculateStatisticsForAllBlobs()">Calculate statistics for all points</button>
+                <button class="btn btn-primary"
+                        ng-click="newTopoMatrixCtrl.exportStatistics()">Export</button>
+            </div>
+        </div>
+    </form>
+
+
 
     <div ng-class="{'row-fluid': newTopoMatrixCtrl.horizontalLayout, 'row': !newTopoMatrixCtrl.horizontalLayout}">
         <div class='matrix-container' ng-class="{'col-md-4': newTopoMatrixCtrl.horizontalLayout}">
             <matrix-image-slider matrix="::newTopoMatrixCtrl.topoMatrix"
                                  on-range-change="newTopoMatrixCtrl.calculateTopoMatrixImageData()"></matrix-image-slider>
-            <ul class="matrix-image-blobs-container">
-                <li class='blob'
-                    ng-mouseenter="newTopoMatrixCtrl.calculateStatisticsForBlob(blob)"
-                    ng-repeat="blob in newTopoMatrixCtrl.topoBlobs"
-                    ng-style="::blob">
-                    <dl class="statistics">
-                        <dt>X</dt>
-                        <dd>{{::blob.center.x}}</dd>
-                        <dt>Y</dt>
-                        <dd>{{::blob.center.y}}</dd>
-                        <dt>Width</dt>
-                        <dd>{{::blob.realWidth}}</dd>
-                        <dt>Height</dt>
-                        <dd>{{::blob.realHeight}}</dd>
-                        <dt>Max difference</dt>
-                        <dd>{{::blob.maxDifference}}</dd>
-                        <dt ng-if="blob.distanceToNearestNeighbor">Neighbor</dt>
-                        <dd>{{::blob.distanceToNearestNeighbor}}</dd>
-                    </dl>
-                </li>
-            </ul>
-            <matrix-image matrix-image-data="newTopoMatrixCtrl.topoMatrixImageData"></matrix-image>
+            <div class="matrix-image-container">
+                <ul class="matrix-image-blobs-container"
+                    ng-style="::newTopoMatrixCtrl.topoMatrixImageData">
+                    <li class='blob'
+                        ng-mouseenter="newTopoMatrixCtrl.calculateStatisticsForBlob(blob)"
+                        ng-repeat="blob in newTopoMatrixCtrl.topoBlobs"
+                        ng-style="::blob.style">
+                        <dl class="statistics">
+                            <dt>X</dt>
+                            <dd>{{::blob.center.x}}</dd>
+                            <dt>Y</dt>
+                            <dd>{{::blob.center.y}}</dd>
+                            <dt>Width</dt>
+                            <dd>{{::blob.realWidth}}</dd>
+                            <dt>Height</dt>
+                            <dd>{{::blob.realHeight}}</dd>
+                            <dt>Max difference</dt>
+                            <dd>{{::(blob.maxDifference | number:3)}}</dd>
+                            <dt ng-if="blob.distanceToNearestNeighbor">Neighbor</dt>
+                            <dd>{{::(blob.distanceToNearestNeighbor | number:3)}}</dd>
+                        </dl>
+                    </li>
+                </ul>
+                <matrix-image matrix-image-data="newTopoMatrixCtrl.topoMatrixImageData"></matrix-image>
+            </div>
         </div>
 
         <div class='matrix-container' ng-class="{'col-md-4': newTopoMatrixCtrl.horizontalLayout}">
             <matrix-image-slider matrix="::newTopoMatrixCtrl.newTopoMatrix"
                                  on-range-change="newTopoMatrixCtrl.calculateNewTopoMatricesImagesData()"></matrix-image-slider>
-            <ul class="matrix-image-blobs-container">
-                <li class='blob'
-                    ng-repeat="blob in newTopoMatrixCtrl.newTopoBlobs"
-                    ng-style="::blob">
-                </li>
-            </ul>
-            <matrix-image matrix-image-data="newTopoMatrixCtrl.grayscaleNewTopoMatrixImageData"></matrix-image>
+            <div class="matrix-image-container">
+                <ul class="matrix-image-blobs-container"
+                    ng-style="::newTopoMatrixCtrl.blackWhiteNewTopoMatrixImageData">
+                    <li class='blob'
+                        ng-repeat="blob in newTopoMatrixCtrl.newTopoBlobs"
+                        ng-style="::blob.style">
+                    </li>
+                </ul>
+                <matrix-image matrix-image-data="newTopoMatrixCtrl.grayscaleNewTopoMatrixImageData"></matrix-image>
+            </div>
         </div>
 
         <div class='matrix-container no-slider' ng-class="{'col-md-4': newTopoMatrixCtrl.horizontalLayout}">
-            <ul class="matrix-image-blobs-container">
-                <li class='blob'
-                    ng-repeat="blob in newTopoMatrixCtrl.newTopoBlobs"
-                    ng-style="::blob">
-                </li>
-            </ul>
-            <matrix-image matrix-image-data="newTopoMatrixCtrl.blackWhiteNewTopoMatrixImageData"></matrix-image>
+            <div class="matrix-image-container">
+                <ul class="matrix-image-blobs-container"
+                    ng-style="::newTopoMatrixCtrl.blackWhiteNewTopoMatrixImageData">
+                    <li class='blob'
+                        ng-repeat="blob in newTopoMatrixCtrl.newTopoBlobs"
+                        ng-style="::blob.style">
+                    </li>
+                </ul>
+                <matrix-image matrix-image-data="newTopoMatrixCtrl.blackWhiteNewTopoMatrixImageData"></matrix-image>
+            </div>
         </div>
     </div>
 
@@ -92,8 +129,8 @@
             <td>{{::blob.center.y}}</td>
             <td>{{::blob.realWidth}}</td>
             <td>{{::blob.realHeight}}</td>
-            <td>{{::blob.maxDifference}}</td>
-            <td>{{::blob.distanceToNearestNeighbor}}</td>
+            <td>{{::(blob.maxDifference | number:3)}}</td>
+            <td>{{::(blob.distanceToNearestNeighbor | number:3)}}</td>
         </tr>
     </table>
 </div>

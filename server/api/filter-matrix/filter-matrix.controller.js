@@ -11,7 +11,6 @@
 var _ = require('lodash');
 var FilterMatrix = require('./filter-matrix.model');
 
-// Get list of things
 exports.index = function(req, res) {
   FilterMatrix.find().sort({name: 1}).exec(function (err, filterMatrices) {
     if(err) { return handleError(res, err); }
@@ -19,7 +18,6 @@ exports.index = function(req, res) {
   });
 };
 
-// Creates a new thing in the DB.
 exports.create = function(req, res) {
   FilterMatrix.create(req.body, function(err, filterMatrix) {
     if(err) { return handleError(res, err); }
@@ -27,13 +25,15 @@ exports.create = function(req, res) {
   });
 };
 
-// Updates an existing thing in the DB.
 exports.update = function(req, res) {
   if(req.body._id) { delete req.body._id; }
   FilterMatrix.findById(req.params.id, function (err, filterMatrix) {
     if (err) { return handleError(res, err); }
     if(!filterMatrix) { return res.send(404); }
-    _.extend(filterMatrix, req.body);
+	  filterMatrix.name = req.body.name;
+	  if (!filterMatrix.readonly) {
+		  filterMatrix.data = req.body.data;
+	  }
     filterMatrix.save(function (err) {
       if (err) { return handleError(res, err); }
       return res.json(200, filterMatrix);
@@ -41,11 +41,11 @@ exports.update = function(req, res) {
   });
 };
 
-// Deletes a thing from the DB.
 exports.destroy = function(req, res) {
   FilterMatrix.findById(req.params.id, function (err, filterMatrix) {
     if(err) { return handleError(res, err); }
     if(!filterMatrix) { return res.send(404); }
+	  if(filterMatrix.readonly) { return res.send(400, 'Can\'t delete readonly matrix.'); }
     filterMatrix.remove(function(err) {
       if(err) { return handleError(res, err); }
       return res.send(204);

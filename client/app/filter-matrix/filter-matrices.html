@@ -17,12 +17,17 @@
                 <span class="title">{{::fm.name}}</span>
 
                 <div class="btn-group pull-right">
-                    <a class="btn btn-default" ui-sref="app.filter-matrix({id: fm._id})">View</a>
-                    <button class="btn btn-default" ng-click="filterMatricesCtrl.clone(fm)">Copy</button>
-                    <button class="btn btn-default" ng-click="filterMatricesCtrl.select(fm)"
-                            ng-if="!filterMatricesCtrl.isSelected(fm)">Select
+                    <a class="btn btn-default"
+                       ui-sref="app.filter-matrix({id: fm._id})">View</a>
+                    <button class="btn btn-default"
+                            ng-click="filterMatricesCtrl.clone(fm)">Copy</button>
+                    <button class="btn btn-default"
+                            ng-if="!filterMatricesCtrl.isSelected(fm)"
+                            ng-click="filterMatricesCtrl.select(fm)">Select
                     </button>
-                    <button class="btn btn-default" ng-click="filterMatricesCtrl.destroy(fm)">Delete</button>
+                    <button class="btn btn-default"
+                            ng-if="!fm.readonly"
+                            ng-click="filterMatricesCtrl.destroy(fm)">Delete</button>
                 </div>
             </li>
         </ul>

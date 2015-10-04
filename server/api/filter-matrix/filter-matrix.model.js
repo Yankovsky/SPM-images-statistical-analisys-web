@@ -7,6 +7,7 @@ var _ = require('lodash'),
 
 var FilterMatrixSchema = new Schema({
   name: String,
+  readonly: Boolean,
   data: {
     type: Array,
     set: function(value) {

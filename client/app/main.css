@@ -1,3 +1,7 @@
+body {
+    padding-bottom: 20px;
+}
+
 .pre-line {
     white-space: pre-line
 }
@@ -55,9 +59,18 @@ canvas {
     position: relative;
 }
 
-.matrix-image-blobs-container {
+.matrix-image-container {
     position: relative;
+}
+
+.matrix-image-blobs-container {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
     list-style: none;
+    padding: 0;
     margin: 0;
 }
 
@@ -75,8 +88,10 @@ canvas {
 
 .matrix-image-blobs-container .blob .statistics {
     display: none;
-    background: #ddd;
+    background: #fff;
     width: 220px;
+    padding: 5px;
+    border: 1px solid #000;
 }
 
 .matrix-image-blobs-container .blob:hover .statistics {
@@ -89,9 +104,9 @@ dl {
 }
 dt {
     float: left;
-    width: 50%;
+    width: 70%;
 }
 dd {
     float: left;
-    width: 50%;
+    width: 30%;
 }

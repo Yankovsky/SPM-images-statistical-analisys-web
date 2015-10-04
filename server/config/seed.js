@@ -28,14 +28,15 @@ FilterMatrix.find({}).remove(function() {
       [0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0]
     ]
   }, {
-    name : 'Какая-то другая',
+    name : 'Неизменяемая матрица',
     data : [
       [1,2,3,4,5],
       [1,2,3,4,5],
       [1,2,3,4,5],
       [1,2,3,4,5],
       [1,2,3,4,5]
-    ]
+    ],
+    readonly: true
   }, {
     name: 'from file',
     data: fs.readFileSync('./data/filter-matrix').toString()

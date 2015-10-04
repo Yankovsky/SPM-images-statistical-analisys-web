@@ -22,6 +22,7 @@ angular.module('spmApp').controller('FilterMatrixCtrl', function($state, $stateP
 	ctrl.save = function() {
 		FilterMatrices.update(ctrl.filterMatrix).success(function() {
 			$flash('Filter matrix "' + ctrl.filterMatrix.name + '" successfully updated!', {type: 'success'});
+			$state.go('app.filter-matrices', null, {location: 'replace'});
 		});
 	};
 });
