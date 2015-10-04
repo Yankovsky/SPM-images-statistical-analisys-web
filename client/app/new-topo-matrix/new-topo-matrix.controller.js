@@ -76,6 +76,13 @@ angular.module('spmApp').controller('NewTopoMatrixCtrl', function(TopoMatrices, 
 		Settings.horizontalLayout(ctrl.horizontalLayout);
 	};
 
+	ctrl.verticalLayoutImageSize = function(imageData) {
+			return {
+				width: ctrl.horizontalLayout ? 'auto' : imageData.width,
+				height: ctrl.horizontalLayout ? 'auto' : imageData.height
+			}
+	};
+
 	ctrl.findBlobsDynamically = Settings.findBlobsDynamically();
 	ctrl.setFindBlobsDynamically = function() {
 		findBlobs();
@@ -113,6 +120,6 @@ angular.module('spmApp').controller('NewTopoMatrixCtrl', function(TopoMatrices, 
 		if (!ctrl.topoBlobs[0].distanceToNearestNeighbor) {
 			ctrl.calculateStatisticsForAllBlobs();
 		}
-		BlobStatisticsExport.asTabSeparatedValues(ctrl.topoBlobs);
+		BlobStatisticsExport.asTabSeparatedValues(ctrl.topoMatrix.name + '-statistics', ctrl.topoBlobs);
 	};
 });

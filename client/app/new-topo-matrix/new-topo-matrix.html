@@ -59,7 +59,7 @@
                                  on-range-change="newTopoMatrixCtrl.calculateTopoMatrixImageData()"></matrix-image-slider>
             <div class="matrix-image-container">
                 <ul class="matrix-image-blobs-container"
-                    ng-style="::newTopoMatrixCtrl.topoMatrixImageData">
+                    ng-style="newTopoMatrixCtrl.verticalLayoutImageSize(newTopoMatrixCtrl.topoMatrixImageData)">
                     <li class='blob'
                         ng-mouseenter="newTopoMatrixCtrl.calculateStatisticsForBlob(blob)"
                         ng-repeat="blob in newTopoMatrixCtrl.topoBlobs"
@@ -89,7 +89,7 @@
                                  on-range-change="newTopoMatrixCtrl.calculateNewTopoMatricesImagesData()"></matrix-image-slider>
             <div class="matrix-image-container">
                 <ul class="matrix-image-blobs-container"
-                    ng-style="::newTopoMatrixCtrl.blackWhiteNewTopoMatrixImageData">
+                    ng-style="newTopoMatrixCtrl.verticalLayoutImageSize(newTopoMatrixCtrl.blackWhiteNewTopoMatrixImageData)">
                     <li class='blob'
                         ng-repeat="blob in newTopoMatrixCtrl.newTopoBlobs"
                         ng-style="::blob.style">
@@ -102,7 +102,7 @@
         <div class='matrix-container no-slider' ng-class="{'col-md-4': newTopoMatrixCtrl.horizontalLayout}">
             <div class="matrix-image-container">
                 <ul class="matrix-image-blobs-container"
-                    ng-style="::newTopoMatrixCtrl.blackWhiteNewTopoMatrixImageData">
+                    ng-style="newTopoMatrixCtrl.verticalLayoutImageSize(newTopoMatrixCtrl.blackWhiteNewTopoMatrixImageData)">
                     <li class='blob'
                         ng-repeat="blob in newTopoMatrixCtrl.newTopoBlobs"
                         ng-style="::blob.style">
