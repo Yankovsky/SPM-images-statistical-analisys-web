@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('spmApp').factory('BlobStatisticsExport', function(SaveAs) {
-	var header = ['#', 'X', 'Y', 'Width', 'Height', 'Max difference', 'Neighbor distance'].join('\t') + '\n';
+	var header = ['#', 'X', 'Y', 'Lateral size X', 'Lateral size Y', 'Height', 'Neighbor distance'].join('\t') + '\n';
 
 	return {
 		asTabSeparatedValues: function(name, blobs) {

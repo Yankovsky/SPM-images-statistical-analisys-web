@@ -24,14 +24,6 @@ var all = {
   // Should we populate the DB with sample data?
   seedDB: false,
 
-  // Secret for session, you will want to change this and make it an environment variable
-  secrets: {
-    session: 'app-secret'
-  },
-
-  // List of user roles
-  userRoles: ['guest', 'user', 'admin'],
-
   // MongoDB connection options
   mongo: {
     options: {
