@@ -13,6 +13,6 @@ module.exports = {
 
   // MongoDB connection options
   mongo: {
-    uri:    'mongodb://localhost/spm '
+    uri:    'mongodb://localhost/spm'
   }
 };
