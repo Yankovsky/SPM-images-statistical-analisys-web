@@ -96,23 +96,6 @@ module.exports = function (grunt) {
       }
     },
 
-    // Make sure code styles are up to par and there are no obvious mistakes
-    jshint: {
-      options: {
-        jshintrc: '<%= yeoman.client %>/.jshintrc',
-        reporter: require('jshint-stylish')
-      },
-      server: {
-        options: {
-          jshintrc: 'server/.jshintrc'
-        },
-        src: [
-          'server/**/*.js',
-          '!server/**/*.spec.js'
-        ]
-      }
-    },
-
     // Empties folders to start fresh
     clean: {
       dist: {
@@ -130,10 +113,11 @@ module.exports = function (grunt) {
       server: '.tmp'
     },
 
-    // Add vendor prefixed styles
-    autoprefixer: {
+    postcss: {
       options: {
-        browsers: ['last 1 version']
+        processors: [
+          require('autoprefixer')({browsers: ['last 1 version']}) // add vendor prefixes
+        ]
       },
       dist: {
         files: [{
@@ -204,7 +188,7 @@ module.exports = function (grunt) {
     },
 
     // Reads HTML for usemin blocks to enable smart builds that automatically
-    // concat, minify and revision files. Creates configurations in memory so
+    // 1at, minify and revision files. Creates configurations in memory so
     // additional tasks can operate on them
     useminPrepare: {
       html: ['<%= yeoman.client %>/index.html'],
@@ -229,29 +213,6 @@ module.exports = function (grunt) {
             [/(assets\/images\/.*?\.(?:gif|jpeg|jpg|png|webp|svg))/gm, 'Update the JS to reference our revved images']
           ]
         }
-      }
-    },
-
-    // The following *-min tasks produce minified files in the dist folder
-    imagemin: {
-      dist: {
-        files: [{
-          expand: true,
-          cwd: '<%= yeoman.client %>/assets/images',
-          src: '{,*/}*.{png,jpg,jpeg,gif}',
-          dest: '<%= yeoman.dist %>/public/assets/images'
-        }]
-      }
-    },
-
-    svgmin: {
-      dist: {
-        files: [{
-          expand: true,
-          cwd: '<%= yeoman.client %>/assets/images',
-          src: '{,*/}*.svg',
-          dest: '<%= yeoman.dist %>/public/assets/images'
-        }]
       }
     },
 
@@ -344,25 +305,6 @@ module.exports = function (grunt) {
       },
     },
 
-    // Run some tasks in parallel to speed up the build process
-    concurrent: {
-      server: [
-      ],
-      debug: {
-        tasks: [
-          'nodemon',
-          'node-inspector'
-        ],
-        options: {
-          logConcurrentOutput: true
-        }
-      },
-      dist: [
-        //'imagemin',
-        'svgmin'
-      ]
-    },
-
     env: {
       prod: {
         NODE_ENV: 'production'
@@ -440,21 +382,20 @@ module.exports = function (grunt) {
       return grunt.task.run([
         'clean:server',
         'env:all',
-        'concurrent:server',
         'injector',
         'wiredep',
-        'autoprefixer',
-        'concurrent:debug'
+        'postcss',
+        'nodemon',
+        'node-inspector'
       ]);
     }
 
     grunt.task.run([
       'clean:server',
       'env:all',
-      'concurrent:server',
       'injector',
       'wiredep',
-      'autoprefixer',
+      'postcss',
       'express:dev',
       'wait',
       'open',
@@ -469,11 +410,10 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'clean:dist',
-    'concurrent:dist',
     'injector',
     'wiredep',
     'useminPrepare',
-    'autoprefixer',
+    'postcss',
     'ngtemplates',
     'concat',
     'ngAnnotate',
@@ -485,7 +425,6 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('default', [
-    'newer:jshint',
     'build'
   ]);
 };
