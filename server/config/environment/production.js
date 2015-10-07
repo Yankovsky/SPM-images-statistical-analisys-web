@@ -8,8 +8,7 @@ module.exports = {
             undefined,
 
   // Server port
-  port:     process.env.PORT ||
-            8080,
+  port:     80,
 
   // MongoDB connection options
   mongo: {
