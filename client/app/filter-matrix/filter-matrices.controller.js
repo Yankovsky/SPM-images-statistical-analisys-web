@@ -15,7 +15,6 @@ angular.module('spmApp').controller('FilterMatricesCtrl', function($state, Uploa
 				var file = files[i];
 				var fileReader = new FileReader();
 				fileReader.readAsText(file);
-				/*jshint loopfunc: true */
 				fileReader.onload = function(e) {
 					FilterMatrices.create({
 						name: file.name,

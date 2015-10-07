@@ -11,7 +11,6 @@ angular.module('spmApp').controller('TopoMatricesCtrl', function($state, Upload,
 				var file = files[i];
 				var fileReader = new FileReader();
 				fileReader.readAsText(file);
-				/*jshint loopfunc: true */
 				fileReader.onload = function(e) {
 					TopoMatrices.create({
 						name: file.name,

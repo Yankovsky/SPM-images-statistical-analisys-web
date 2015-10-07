@@ -46,7 +46,7 @@
     "time-grunt": "~1.2.1"
   },
   "scripts": {
-    "start": "node server/app.js"
+    "start": "NODE_ENV=production PORT=80 node dist/server/app.js"
   },
   "private": true
 }
