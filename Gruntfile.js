@@ -2,13 +2,6 @@
 'use strict';
 
 module.exports = function (grunt) {
-  var localConfig;
-  try {
-    localConfig = require('./server/config/local.env');
-  } catch(e) {
-    localConfig = {};
-  }
-
   // Load grunt tasks automatically, when needed
   require('jit-grunt')(grunt, {
     express: 'grunt-express-server',
@@ -279,13 +272,6 @@ module.exports = function (grunt) {
         connectCommits: false,
         message: 'Built %sourceName% from commit %sourceCommit% on branch %sourceBranch%'
       },
-    },
-
-    env: {
-      prod: {
-        NODE_ENV: 'production'
-      },
-      all: localConfig
     }
   });
 
@@ -307,13 +293,12 @@ module.exports = function (grunt) {
 
   grunt.registerTask('serve', function (target) {
     if (target === 'dist') {
-      return grunt.task.run(['build', 'env:all', 'env:prod', 'express:prod', 'wait', 'express-keepalive']);
+      return grunt.task.run(['build', 'express:prod', 'wait', 'express-keepalive']);
     }
 
     if (target === 'debug') {
       return grunt.task.run([
         'clean:server',
-        'env:all',
         'postcss',
         'nodemon',
         'node-inspector'
@@ -322,7 +307,6 @@ module.exports = function (grunt) {
 
     grunt.task.run([
       'clean:server',
-      'env:all',
       'postcss',
       'express:dev',
       'wait',
