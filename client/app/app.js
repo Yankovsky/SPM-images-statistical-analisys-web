@@ -48,10 +48,9 @@ angular.module('spmApp', [
 			templateUrl: 'app/new-topo-matrix/new-topo-matrix.html',
 			controller: 'NewTopoMatrixCtrl as newTopoMatrixCtrl'
 		})
-		.state('app.settings', {
-			url: '/settings',
-			templateUrl: 'app/settings/settings.html',
-			controller: 'SettingsCtrl as settingsCtrl'
+		.state('app.about', {
+			url: '/about',
+			templateUrl: 'app/about/about.html'
 		});
 
 	$urlRouterProvider.otherwise('/');
