@@ -18,6 +18,10 @@ canvas {
     display: block;
 }
 
+.matrices-container {
+    margin: 0 auto;
+}
+
 .matrix-container {
     margin-bottom: 10px;
 }

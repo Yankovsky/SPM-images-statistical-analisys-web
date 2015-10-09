@@ -51,9 +51,9 @@
         </div>
     </form>
 
-
-
-    <div ng-class="{'row-fluid': newTopoMatrixCtrl.horizontalLayout, 'row': !newTopoMatrixCtrl.horizontalLayout}">
+    <div class="matrices-container"
+         ng-style="{width: newTopoMatrixCtrl.verticalLayoutImageSize(newTopoMatrixCtrl.topoMatrixImageData).width}"
+         ng-class="{'row-fluid': newTopoMatrixCtrl.horizontalLayout, 'row': !newTopoMatrixCtrl.horizontalLayout}">
         <div class='matrix-container' ng-class="{'col-md-4': newTopoMatrixCtrl.horizontalLayout}">
             <matrix-image-slider matrix="::newTopoMatrixCtrl.topoMatrix"
                                  on-range-change="newTopoMatrixCtrl.calculateTopoMatrixImageData()"></matrix-image-slider>
